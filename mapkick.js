@@ -160,21 +160,21 @@
       });
 
       map.on("mouseenter", "objects", function(e) {
+        if (e.features[0].properties.tooltip) {
           // Change the cursor style as a UI indicator.
           map.getCanvas().style.cursor = "pointer";
 
           // Populate the popup and set its coordinates
           // based on the feature found.
-          if (e.features[0].properties.tooltip) {
-            popup.setLngLat(e.features[0].geometry.coordinates)
-                .setText(e.features[0].properties.tooltip)
-                .addTo(map);
-          }
+          popup.setLngLat(e.features[0].geometry.coordinates)
+            .setText(e.features[0].properties.tooltip)
+            .addTo(map);
+        }
       });
 
       map.on("mouseleave", "objects", function() {
-          map.getCanvas().style.cursor = "";
-          popup.remove();
+        map.getCanvas().style.cursor = "";
+        popup.remove();
       });
     });
   }
