@@ -97,7 +97,7 @@
         type: "Feature",
         geometry: {
           type: "Point",
-          coordinates: [row.longitude, row.latitude],
+          coordinates: [row.longitude || row.lng || row.lon, row.latitude || row.lat],
         },
         properties: {
           label: row.label,
