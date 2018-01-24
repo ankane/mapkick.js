@@ -93,16 +93,14 @@
 
     for (var i = 0; i < data.length; i++) {
       var row = data[i];
+      var properties = Object.assign({icon: "triangle"}, row);
       geojson.features.push({
         type: "Feature",
         geometry: {
           type: "Point",
           coordinates: [row.longitude || row.lng || row.lon, row.latitude || row.lat],
         },
-        properties: {
-          label: row.label,
-          icon: row.icon || "triangle"
-        }
+        properties: properties
       });
     }
 
@@ -146,8 +144,37 @@
         source: "objects",
         type: "symbol",
         layout: {
-          "icon-image": "{icon}-15"
+          "icon-image": "{icon}-15",
+          "text-field": "{label}",
+          "text-size": 11,
+          "text-anchor": "top",
+          "text-offset": [0, 1]
         }
+      });
+
+      // Create a popup, but don't add it to the map yet.
+      var popup = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false,
+          offset: 14
+      });
+
+      map.on("mouseenter", "objects", function(e) {
+          // Change the cursor style as a UI indicator.
+          map.getCanvas().style.cursor = "pointer";
+
+          // Populate the popup and set its coordinates
+          // based on the feature found.
+          if (e.features[0].properties.tooltip) {
+            popup.setLngLat(e.features[0].geometry.coordinates)
+                .setText(e.features[0].properties.tooltip)
+                .addTo(map);
+          }
+      });
+
+      map.on("mouseleave", "objects", function() {
+          map.getCanvas().style.cursor = "";
+          popup.remove();
       });
     });
   }
