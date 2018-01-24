@@ -169,6 +169,12 @@
           popup.setLngLat(e.features[0].geometry.coordinates)
             .setText(e.features[0].properties.tooltip)
             .addTo(map);
+
+          // fix blurriness for non-retina screens
+          // https://github.com/mapbox/mapbox-gl-js/pull/3258
+          if (popup._container.offsetWidth % 2 !== 0) {
+            popup._container.style.width = popup._container.offsetWidth + 1 + "px";
+          }
         }
       });
 
