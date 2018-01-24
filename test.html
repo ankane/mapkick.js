@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mapkick</title>
+
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js"></script>
+    <script>
+      // this is not secret
+      mapboxgl.accessToken = "pk.eyJ1IjoiYW5rYW5lIiwiYSI6Il9xWWlEVjAifQ.DSGfsBxWa6wkZNtMAgcP9g";
+    </script>
+    <script src="mapkick.js"></script>
+  </head>
+  <body>
+    <div id="map" style="height: 500px"></div>
+
+    <script>
+      new Mapkick.Map("map", [{latitude: 37.7829, longitude: -122.4190, icon: "triangle"}], {zoom: 13});
+    </script>
+  </body>
+</html>

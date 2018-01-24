@@ -1,0 +1,17 @@
+{
+  "name": "mapkick",
+  "description": "Create beautiful, interactive maps with one line of JavaScript",
+  "main": "mapkick.js",
+  "authors": [
+    "ankane"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ankane/mapkick.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
