@@ -71,7 +71,7 @@ Show routes [master]
 new Mapkick.Map(id, url, {route: true, refresh: 10})
 ```
 
-The `id` attribute is used to identify objects.
+The `id` attribute is used to identify objects
 
 ```javascript
 [
