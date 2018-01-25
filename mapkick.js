@@ -115,7 +115,7 @@
   }
 
   function routeId(row) {
-    return row.id || "empty";
+    return row.id;
   }
 
   function recordRoutes(data) {
