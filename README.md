@@ -86,6 +86,23 @@ Limit route length [master]
 new Mapkick.Map(id, url, {route: {limit: 10}, refresh: 10})
 ```
 
+## Replay Data [master, alpha]
+
+```javascript
+new Mapkick.Map(id, url, {replay: true})
+```
+
+The `timestamp` attribute is used to group events and the `id` attribute is used to identify objects
+
+```javascript
+[
+  {id: "bus-1", lat: ..., lon: ..., timestamp: t0},
+  {id: "bus-2", lat: ..., lon: ..., timestamp: t0},
+  {id: "bus-1", lat: ..., lon: ..., timestamp: t1},
+  {id: "bus-2", lat: ..., lon: ..., timestamp: t1},
+]
+```
+
 ## Map Options
 
 ```javascript
@@ -111,7 +128,6 @@ Mapkick uses [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/). You must 
 ## TODO
 
 - more customization
-- replay routes
 - support GeoJSON
 - better demo
 
