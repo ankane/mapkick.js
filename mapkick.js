@@ -82,9 +82,11 @@
 
   function updateMap(element, data, options) {
     onMapLoad( function () {
-      recordRoutes(data);
+      if (options.route) {
+        recordRoutes(data, options.route);
+        map.getSource("routes").setData(generateRoutesGeoJSON(data));
+      }
       map.getSource("objects").setData(generateGeoJSON(data));
-      map.getSource("routes").setData(generateRoutesGeoJSON(data));
     });
   }
 
@@ -118,7 +120,7 @@
     return row.id;
   }
 
-  function recordRoutes(data) {
+  function recordRoutes(data, routeOptions) {
     for (var i = 0; i < data.length; i++) {
       var row = data[i];
       var route_id = routeId(row);
@@ -126,6 +128,9 @@
         routes[route_id] = [];
       }
       routes[route_id].push(rowCoordinates(row));
+      if (routeOptions && routeOptions.limit && routes[route_id].length > routeOptions.limit) {
+        routes[route_id].shift();
+      }
     }
   }
 
@@ -203,7 +208,6 @@
   }
 
   function generateMap(element, data, options) {
-    recordRoutes(data);
     var geojson = generateGeoJSON(data);
     options = options || {};
 
@@ -231,6 +235,8 @@
 
     onMapLoad( function () {
       if (options.route) {
+        recordRoutes(data);
+
         map.addSource("routes", {
           type: "geojson",
           data: generateRoutesGeoJSON([])

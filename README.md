@@ -66,7 +66,13 @@ new Mapkick.Map(id, url, {refresh: 10})
 Show routes [master]
 
 ```javascript
-new Mapkick.Map(id, url, {refresh: 10, route: true})
+new Mapkick.Map(id, url, {route: true, refresh: 10})
+```
+
+Limit route length [master]
+
+```javascript
+new Mapkick.Map(id, url, {route: {limit: 10}, refresh: 10})
 ```
 
 ## Map Options
