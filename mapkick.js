@@ -312,9 +312,8 @@
         });
       }
 
-      // TODO only load marker when needed
       // TODO allow other colors and sizes
-      map.loadImage("https://a.tiles.mapbox.com/v4/marker/pin-m+f86767.png?access_token=" + window.mapboxgl.accessToken, function(error, image) {
+      map.loadImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAABGCAMAAADsM9QKAAAAilBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASDAw+JibXiIj5j4/6mpr6m5v6m5vcjY35nJz5nZ36np7hlJT6n5/6oaHmm5v6pKT6pKTsoqL6pqb7qan7qan7q6v7rKz7ra36ra36r6/6sbH3ZWX3dHT4fX34gYH4h4f5jY35lpb5mpr6oaH6rKz7srKMJMh3AAAAI3RSTlMACRcjKzM7QENNQBkJHTR9UmN2pYaHwamw1MDN09zg5u3y+aldHNEAAAFgSURBVEiJ7ZPJtoMgEEQ1TpnnwSSaRHCKof7/956CKCiLbN4utfBwzi2gqW4t62ut92FM4nC/NsIIUtHYcCRgVZHStKgYyFGHq3rrm0q96wNWKr6D5bRXznBX6AkspapShlNfFUFOdeUgXX0P5d7+/kdLt2AjSinDVuALKgOucBE4RmHABWKBX0gNOMVLYAIDpRTkq90RMgPOEAkcojTgEuFX77YSw+kZEhnqBZ8R/shULGuRGFqSLNSGjm7uG2otn4NcCzyXyjzsBtsZdtqwRVrL3zIS48Coo9JXJ5PXBk3q1l3PcBvRpnoxNJVetZBtzwlvTQkyt+0BsyeTyQZ19hmwqde24uDQcZwDWMZwqFfcoFDHcV3PO9e/59nzXLcxtLyjvj+94jr1fY23uKZBMLvOgqDhZsxlxB0fHK6U5nl+89Fo/zBXaPAwGQu3cKTH0jqEhSOdqSYz+Omnn/5FfxV+VlT54SzbAAAAAElFTkSuQmCC", function(error, image) {
         map.addImage("mapkick-15", image);
 
         addLayer("objects", geojson);
