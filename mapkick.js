@@ -57,6 +57,7 @@
 
   function createMap(element, data, options) {
     options = options || {};
+    bounds = new window.mapboxgl.LngLatBounds();
 
     if (options.replay) {
       fetchData(element, data, options, generateReplayMap);
@@ -93,6 +94,7 @@
           groupedData[ts] = [];
         }
         groupedData[ts].push(row);
+        bounds.extend(rowCoordinates(row));
       }
     }
 
@@ -267,11 +269,12 @@
     });
   }
 
+  var bounds;
+
   function generateMap(element, data, options) {
     var geojson = generateGeoJSON(data);
     options = options || {};
 
-    var bounds = new window.mapboxgl.LngLatBounds();
     geojson.features.forEach(function(feature) {
       bounds.extend(feature.geometry.coordinates);
     });
