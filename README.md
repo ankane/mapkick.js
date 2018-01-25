@@ -88,7 +88,6 @@ Mapkick uses [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/). You must 
 ## TODO
 
 - more customization
-- labels and tooltips
 - trace routes
 - replay routes
 - support GeoJSON
