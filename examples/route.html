@@ -21,6 +21,8 @@
       function fetchData(callback) {
         var next = data.shift();
         if (next) {
+          next.icon = "bus";
+          next.tooltip = "Vehicle 8184";
           callback([next]);
         }
       }

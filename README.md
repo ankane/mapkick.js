@@ -41,6 +41,8 @@ function fetchData(callback) {
 new Mapkick.Map(id, fetchData)
 ```
 
+You can use `latitude`, `lat`, `longitude`, `lon`, and `lng`.
+
 You can specify an icon, label, and tooltip for each data point [master]
 
 ```javascript
@@ -67,6 +69,15 @@ Show routes [master]
 
 ```javascript
 new Mapkick.Map(id, url, {route: true, refresh: 10})
+```
+
+The `id` attribute is used to identify objects.
+
+```javascript
+[
+  {id: "bus-1", lat: ..., lon: ...},
+  {id: "bus-2", lat: ..., lon: ...}
+]
 ```
 
 Limit route length [master]
