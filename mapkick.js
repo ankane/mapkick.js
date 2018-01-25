@@ -145,10 +145,12 @@
         type: "symbol",
         layout: {
           "icon-image": "{icon}-15",
+          "icon-allow-overlap": true,
           "text-field": "{label}",
           "text-size": 11,
           "text-anchor": "top",
-          "text-offset": [0, 1]
+          "text-offset": [0, 1],
+          "text-allow-overlap": true
         }
       });
 
