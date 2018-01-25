@@ -107,6 +107,59 @@
     return geojson;
   }
 
+  function addLayer(name, geojson) {
+    map.addSource(name, {
+      type: "geojson",
+      data: geojson
+    });
+
+    map.addLayer({
+      id: name,
+      source: name,
+      type: "symbol",
+      layout: {
+        "icon-image": "{icon}-15",
+        "icon-allow-overlap": true,
+        "text-field": "{label}",
+        "text-size": 11,
+        "text-anchor": "top",
+        "text-offset": [0, 1],
+        "text-allow-overlap": true
+      }
+    });
+
+    // Create a popup, but don't add it to the map yet.
+    var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        offset: 14
+    });
+
+    map.on("mouseenter", name, function(e) {
+      if (e.features[0].properties.tooltip) {
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = "pointer";
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(e.features[0].geometry.coordinates)
+          .setText(e.features[0].properties.tooltip)
+          .addTo(map);
+
+        // fix blurriness for non-retina screens
+        // https://github.com/mapbox/mapbox-gl-js/pull/3258
+        if (popup._container.offsetWidth % 2 !== 0) {
+          popup._container.style.width = popup._container.offsetWidth + 1 + "px";
+        }
+      }
+    });
+
+    map.on("mouseleave", name, function() {
+      map.getCanvas().style.cursor = "";
+      popup.remove();
+    });
+  }
+
   function generateMap(element, data, options) {
     var geojson = generateGeoJSON(data);
     options = options || {};
@@ -134,56 +187,7 @@
     }
 
     onMapLoad( function () {
-      map.addSource("objects", {
-        type: "geojson",
-        data: geojson
-      });
-
-      map.addLayer({
-        id: "objects",
-        source: "objects",
-        type: "symbol",
-        layout: {
-          "icon-image": "{icon}-15",
-          "icon-allow-overlap": true,
-          "text-field": "{label}",
-          "text-size": 11,
-          "text-anchor": "top",
-          "text-offset": [0, 1],
-          "text-allow-overlap": true
-        }
-      });
-
-      // Create a popup, but don't add it to the map yet.
-      var popup = new mapboxgl.Popup({
-          closeButton: false,
-          closeOnClick: false,
-          offset: 14
-      });
-
-      map.on("mouseenter", "objects", function(e) {
-        if (e.features[0].properties.tooltip) {
-          // Change the cursor style as a UI indicator.
-          map.getCanvas().style.cursor = "pointer";
-
-          // Populate the popup and set its coordinates
-          // based on the feature found.
-          popup.setLngLat(e.features[0].geometry.coordinates)
-            .setText(e.features[0].properties.tooltip)
-            .addTo(map);
-
-          // fix blurriness for non-retina screens
-          // https://github.com/mapbox/mapbox-gl-js/pull/3258
-          if (popup._container.offsetWidth % 2 !== 0) {
-            popup._container.style.width = popup._container.offsetWidth + 1 + "px";
-          }
-        }
-      });
-
-      map.on("mouseleave", "objects", function() {
-        map.getCanvas().style.cursor = "";
-        popup.remove();
-      });
+      addLayer("objects", geojson);
     });
   }
 
