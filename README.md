@@ -71,7 +71,7 @@ Show routes [master]
 new Mapkick.Map(id, url, {route: true, refresh: 10})
 ```
 
-The `id` attribute is used to identify objects
+Use the `id` attribute to identify objects
 
 ```javascript
 [
@@ -92,16 +92,18 @@ new Mapkick.Map(id, url, {route: {limit: 10}, refresh: 10})
 new Mapkick.Map(id, url, {replay: true})
 ```
 
-The `timestamp` attribute is used to group events and the `id` attribute is used to identify objects
+Use the `id` attribute to identify objects and the `time` attribute for when the data was measured
 
 ```javascript
 [
-  {id: "bus-1", lat: ..., lon: ..., timestamp: t0},
-  {id: "bus-2", lat: ..., lon: ..., timestamp: t0},
-  {id: "bus-1", lat: ..., lon: ..., timestamp: t1},
-  {id: "bus-2", lat: ..., lon: ..., timestamp: t1},
+  {id: "bus-1", lat: ..., lon: ..., time: t0},
+  {id: "bus-2", lat: ..., lon: ..., time: t0},
+  {id: "bus-1", lat: ..., lon: ..., time: t1},
+  {id: "bus-2", lat: ..., lon: ..., time: t1},
 ]
 ```
+
+Times can be a `Date`, a timestamp (or sequence number), or a string (strings are parsed)
 
 ## Map Options
 

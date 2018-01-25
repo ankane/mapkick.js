@@ -75,21 +75,30 @@
   var timestamps = [];
   var timeIndex = 0;
 
+  function toTimestamp(ts) {
+    if (typeof ts === "number") {
+      return ts;
+    } else {
+      return (new Date(ts)).getTime() / 1000;
+    }
+  }
+
   function generateReplayMap(element, data, options) {
     // group data
     for (var i = 0; i < data.length; i++) {
       var row = data[i];
-      if (row.timestamp) {
-        if (!groupedData[row.timestamp]) {
-          groupedData[row.timestamp] = [];
+      var ts = toTimestamp(row.time);
+      if (ts) {
+        if (!groupedData[ts]) {
+          groupedData[ts] = [];
         }
-        groupedData[row.timestamp].push(row);
+        groupedData[ts].push(row);
       }
     }
 
     for (i in groupedData) {
       if (groupedData.hasOwnProperty(i)) {
-        timestamps.push(i);
+        timestamps.push(parseInt(i));
       }
     }
     timestamps.sort();
