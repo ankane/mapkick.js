@@ -57,12 +57,62 @@
 
   function createMap(element, data, options) {
     options = options || {};
-    fetchData(element, data, options, generateMap);
 
-    if (options.refresh) {
-      setInterval( function () {
-        fetchData(element, data, options, updateMap);
-      }, options.refresh * 1000);
+    if (options.replay) {
+      fetchData(element, data, options, generateReplayMap);
+    } else {
+      fetchData(element, data, options, generateMap);
+
+      if (options.refresh) {
+        setInterval( function () {
+          fetchData(element, data, options, updateMap);
+        }, options.refresh * 1000);
+      }
+    }
+  }
+
+  var groupedData = {};
+  var timestamps = [];
+  var timeIndex = 0;
+
+  function generateReplayMap(element, data, options) {
+    // group data
+    for (var i = 0; i < data.length; i++) {
+      var row = data[i];
+      if (row.timestamp) {
+        if (!groupedData[row.timestamp]) {
+          groupedData[row.timestamp] = [];
+        }
+        groupedData[row.timestamp].push(row);
+      }
+    }
+
+    for (i in groupedData) {
+      if (groupedData.hasOwnProperty(i)) {
+        timestamps.push(i);
+      }
+    }
+    timestamps.sort();
+
+    // create map
+    generateMap(element, groupedData[timestamps[timeIndex]], options);
+
+    onMapLoad( function () {
+      setTimeout(function () {
+        nextFrame(element, options);
+      }, 100);
+    });
+  }
+
+  function nextFrame(element, options) {
+    timeIndex++;
+
+    updateMap(element, groupedData[timestamps[timeIndex]], options);
+
+    if (timeIndex < timestamps.length - 1) {
+      setTimeout(function () {
+        nextFrame(element, options);
+      }, 100);
     }
   }
 
