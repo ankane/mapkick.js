@@ -2,6 +2,7 @@
 
 - Support `lat`, `lng`, and `lon`
 - Added labels and tooltips
+- Added `route` option
 
 ## 0.0.1
 

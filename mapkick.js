@@ -12,6 +12,7 @@
   'use strict';
 
   var map;
+  var routes = {};
 
   function getJSON(element, url, success) {
     ajaxCall(url, success, function (jqXHR, textStatus, errorThrown) {
@@ -81,7 +82,9 @@
 
   function updateMap(element, data, options) {
     onMapLoad( function () {
+      recordRoutes(data);
       map.getSource("objects").setData(generateGeoJSON(data));
+      map.getSource("routes").setData(generateRoutesGeoJSON(data));
     });
   }
 
@@ -98,9 +101,48 @@
         type: "Feature",
         geometry: {
           type: "Point",
-          coordinates: [row.longitude || row.lng || row.lon, row.latitude || row.lat],
+          coordinates: rowCoordinates(row),
         },
         properties: properties
+      });
+    }
+
+    return geojson;
+  }
+
+  function rowCoordinates(row) {
+    return [row.longitude || row.lng || row.lon, row.latitude || row.lat];
+  }
+
+  function routeId(row) {
+    return row.id || "empty";
+  }
+
+  function recordRoutes(data) {
+    for (var i = 0; i < data.length; i++) {
+      var row = data[i];
+      var route_id = routeId(row);
+      if (!routes[route_id]) {
+        routes[route_id] = [];
+      }
+      routes[route_id].push(rowCoordinates(row));
+    }
+  }
+
+  function generateRoutesGeoJSON(data) {
+    var geojson = {
+      type: "FeatureCollection",
+      features: []
+    };
+
+    for (var i = 0; i < data.length; i++) {
+      var row = data[i];
+      geojson.features.push({
+        type: "Feature",
+        geometry: {
+          type: "LineString",
+          coordinates: routes[routeId(row)]
+        }
       });
     }
 
@@ -161,6 +203,7 @@
   }
 
   function generateMap(element, data, options) {
+    recordRoutes(data);
     var geojson = generateGeoJSON(data);
     options = options || {};
 
@@ -187,6 +230,27 @@
     }
 
     onMapLoad( function () {
+      if (options.route) {
+        map.addSource("routes", {
+          type: "geojson",
+          data: generateRoutesGeoJSON([])
+        });
+
+        map.addLayer({
+          id: "routes",
+          source: "routes",
+          type: "line",
+          layout: {
+            "line-join": "round",
+            "line-cap": "round"
+          },
+          paint: {
+            "line-color": "#888",
+            "line-width": 2
+          }
+        });
+      }
+
       addLayer("objects", geojson);
     });
   }

@@ -63,6 +63,12 @@ Refresh data periodically from a remote source to create a live map (specified i
 new Mapkick.Map(id, url, {refresh: 10})
 ```
 
+Show routes [master]
+
+```javascript
+new Mapkick.Map(id, url, {refresh: 10, route: true})
+```
+
 ## Map Options
 
 ```javascript
@@ -88,7 +94,6 @@ Mapkick uses [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/). You must 
 ## TODO
 
 - more customization
-- trace routes
 - replay routes
 - support GeoJSON
 - better demo
