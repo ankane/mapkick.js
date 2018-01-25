@@ -148,7 +148,7 @@
 
     for (var i = 0; i < data.length; i++) {
       var row = data[i];
-      var properties = Object.assign({icon: "triangle"}, row);
+      var properties = Object.assign({icon: "mapkick"}, row);
       geojson.features.push({
         type: "Feature",
         geometry: {
@@ -228,14 +228,15 @@
     // Create a popup, but don't add it to the map yet.
     var popup = new mapboxgl.Popup({
         closeButton: false,
-        closeOnClick: false,
-        offset: 14
+        closeOnClick: false
     });
 
     map.on("mouseenter", name, function(e) {
       if (e.features[0].properties.tooltip) {
         // Change the cursor style as a UI indicator.
         map.getCanvas().style.cursor = "pointer";
+
+        popup.options.offset = e.features[0].properties.icon === "mapkick" ? 40 : 14;
 
         // Populate the popup and set its coordinates
         // based on the feature found.
@@ -275,6 +276,10 @@
         zoom: options.zoom || 15
     });
 
+    if (options.controls) {
+      map.addControl(new mapboxgl.NavigationControl({showCompass: false}));
+    }
+
     if (!options.zoom) {
       // hack to prevent error
       if (!map.style.stylesheet) {
@@ -307,7 +312,13 @@
         });
       }
 
-      addLayer("objects", geojson);
+      // TODO only load marker when needed
+      // TODO allow other colors and sizes
+      map.loadImage("https://a.tiles.mapbox.com/v4/marker/pin-m+f86767.png?access_token=" + window.mapboxgl.accessToken, function(error, image) {
+        map.addImage("mapkick-15", image);
+
+        addLayer("objects", geojson);
+      });
     });
   }
 
