@@ -41,13 +41,15 @@ function fetchData(callback) {
 new Mapkick.Map(id, fetchData)
 ```
 
-You can specify an icon for each data point with:
+You can specify an icon, label, and tooltip for each data point [master]
 
 ```javascript
 {
   latitude: ...,
   longitude: ...,
-  icon: "restaurant"
+  icon: "restaurant",
+  label: "Hot Chicken Takeover",
+  tooltip: "5 stars"
 }
 ```
 
