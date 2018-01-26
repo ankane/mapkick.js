@@ -55,7 +55,7 @@ You can specify an icon, label, and tooltip for each data point [master]
 }
 ```
 
-[Maki icons](https://www.mapbox.com/maki-icons/) are supported.
+[Maki icons](https://www.mapbox.com/maki-icons/) are supported
 
 ## Live Updates
 
