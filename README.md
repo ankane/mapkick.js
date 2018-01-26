@@ -9,10 +9,10 @@ Create beautiful, interactive maps with one line of JavaScript
 Create a map
 
 ```html
-<div id="map" style="height: 400px"></div>
+<div id="map" style="height: 400px;"></div>
 
 <script>
-  new Mapkick.Map("map", [{latitude: 37.7829, longitude: -122.4190}])
+  new Mapkick.Map("map", [{latitude: 37.7829, longitude: -122.4190}]);
 </script>
 ```
 
@@ -34,12 +34,12 @@ Or a function
 
 ```javascript
 function fetchData(callback) {
-  callback(someData)
+  callback(someData);
 }
 new Mapkick.Map(id, fetchData)
 ```
 
-You can use `latitude`, `lat`, `longitude`, `lon`, and `lng`.
+You can use `latitude`, `lat`, `longitude`, `lon`, and `lng`
 
 You can specify an icon, label, and tooltip for each data point
 
@@ -122,7 +122,7 @@ Mapkick uses [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/). You must 
 <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css" rel="stylesheet" />
 <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js"></script>
 <script>
-  mapboxgl.accessToken = "YOUR-TOKEN"
+  mapboxgl.accessToken = "YOUR-TOKEN";
 </script>
 <script src="mapkick.js"></script>
 ```
