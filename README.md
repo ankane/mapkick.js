@@ -11,10 +11,10 @@ Create beautiful, interactive maps with one line of JavaScript
 Create a map
 
 ```html
-<div id="map" style="height: 500px"></div>
+<div id="map" style="height: 400px"></div>
 
 <script>
-  new Mapkick.Map("map", [{latitude: 37.7749, longitude: -122.4194}])
+  new Mapkick.Map("map", [{latitude: 37.7829, longitude: -122.4190}])
 </script>
 ```
 
@@ -23,7 +23,7 @@ Create a map
 Data can be an array
 
 ```javascript
-new Mapkick.Map(id, [{latitude: 37.7749, longitude: -122.4194}])
+new Mapkick.Map(id, [{latitude: 37.7829, longitude: -122.4190}])
 ```
 
 Or a URL that returns JSON (same format as above)
@@ -59,10 +59,10 @@ You can specify an icon, label, and tooltip for each data point [master]
 
 ## Live Updates
 
-Refresh data periodically from a remote source to create a live map (specified in seconds)
+Refresh data periodically from a remote source to create a live map
 
 ```javascript
-new Mapkick.Map(id, url, {refresh: 10})
+new Mapkick.Map(id, url, {refresh: 10}) // seconds
 ```
 
 Show routes [master]
@@ -86,10 +86,10 @@ Limit route length [master]
 new Mapkick.Map(id, url, {route: {limit: 10}, refresh: 10})
 ```
 
-## Replay Data [master, alpha]
+## Replay Data [master]
 
 ```javascript
-new Mapkick.Map(id, url, {replay: true})
+new Mapkick.Map(id, data, {replay: true})
 ```
 
 Use the `id` attribute to identify objects and the `time` attribute for when the data was measured
@@ -126,12 +126,6 @@ Mapkick uses [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/). You must 
 </script>
 <script src="mapkick.js"></script>
 ```
-
-## TODO
-
-- more customization
-- support GeoJSON
-- better demo
 
 ## History
 
