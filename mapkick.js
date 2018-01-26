@@ -132,11 +132,11 @@
             recordRoutes(data, options.route);
             map.getSource("routes").setData(generateRoutesGeoJSON(data));
           }
-          map.getSource("objects").setData(generateGeoJSON(data));
+          map.getSource("objects").setData(generateGeoJSON(data, options));
         });
       }
 
-      function generateGeoJSON(data) {
+      function generateGeoJSON(data, options) {
         var geojson = {
           type: "FeatureCollection",
           features: []
@@ -144,7 +144,7 @@
 
         for (var i = 0; i < data.length; i++) {
           var row = data[i];
-          var properties = Object.assign({icon: "mapkick"}, row);
+          var properties = Object.assign({icon: options.icon || "mapkick"}, row);
           geojson.features.push({
             type: "Feature",
             geometry: {
@@ -255,12 +255,12 @@
       }
 
       function generateMap(element, data, options) {
-        var geojson = generateGeoJSON(data);
+        var geojson = generateGeoJSON(data, options);
         options = options || {};
 
-        geojson.features.forEach(function(feature) {
-          bounds.extend(feature.geometry.coordinates);
-        });
+        for (var i = 0; i < geojson.features.length; i++) {
+          bounds.extend(geojson.features[i].geometry.coordinates);
+        }
 
         map = new window.mapboxgl.Map({
             container: element,

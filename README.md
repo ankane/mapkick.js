@@ -99,7 +99,7 @@ Use the `id` attribute to identify objects and the `time` attribute for when the
   {id: "bus-1", lat: ..., lon: ..., time: t0},
   {id: "bus-2", lat: ..., lon: ..., time: t0},
   {id: "bus-1", lat: ..., lon: ..., time: t1},
-  {id: "bus-2", lat: ..., lon: ..., time: t1},
+  {id: "bus-2", lat: ..., lon: ..., time: t1}
 ]
 ```
 
@@ -110,7 +110,8 @@ Times can be a `Date`, a timestamp (or sequence number), or a string (strings ar
 ```javascript
 {
   style: "mapbox://styles/mapbox/streets-v9",
-  zoom: 15
+  zoom: 15,
+  icon: "default-icon"
 }
 ```
 
