@@ -111,7 +111,8 @@ Times can be a `Date`, a timestamp (or sequence number), or a string (strings ar
 {
   style: "mapbox://styles/mapbox/streets-v9",
   zoom: 15,
-  icon: "default-icon"
+  icon: "default-icon",
+  controls: true
 }
 ```
 
