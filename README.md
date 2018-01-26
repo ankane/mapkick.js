@@ -4,8 +4,6 @@ Create beautiful, interactive maps with one line of JavaScript
 
 [View the demo](https://www.chartkick.com/mapkick)
 
-**MVP: Improved demo, docs, and features coming soon**
-
 ## Getting Started
 
 Create a map
@@ -43,7 +41,7 @@ new Mapkick.Map(id, fetchData)
 
 You can use `latitude`, `lat`, `longitude`, `lon`, and `lng`.
 
-You can specify an icon, label, and tooltip for each data point [master]
+You can specify an icon, label, and tooltip for each data point
 
 ```javascript
 {
@@ -65,7 +63,7 @@ Refresh data periodically from a remote source to create a live map
 new Mapkick.Map(id, url, {refresh: 10}) // seconds
 ```
 
-Show routes [master]
+Show routes
 
 ```javascript
 new Mapkick.Map(id, url, {route: true, refresh: 10})
@@ -80,13 +78,13 @@ Use the `id` attribute to identify objects
 ]
 ```
 
-Limit route length [master]
+Limit route length
 
 ```javascript
 new Mapkick.Map(id, url, {route: {limit: 10}, refresh: 10})
 ```
 
-## Replay Data [master]
+## Replay Data
 
 ```javascript
 new Mapkick.Map(id, data, {replay: true})
