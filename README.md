@@ -66,7 +66,7 @@ new Mapkick.Map(id, url, {refresh: 10}) // seconds
 Show routes
 
 ```javascript
-new Mapkick.Map(id, url, {route: true, refresh: 10})
+new Mapkick.Map(id, url, {routes: true, refresh: 10})
 ```
 
 Use the `id` attribute to identify objects
@@ -81,7 +81,7 @@ Use the `id` attribute to identify objects
 Limit route length
 
 ```javascript
-new Mapkick.Map(id, url, {route: {limit: 10}, refresh: 10})
+new Mapkick.Map(id, url, {routes: {maxLength: 10}, refresh: 10})
 ```
 
 ## Replay Data
@@ -109,7 +109,7 @@ Times can be a `Date`, a timestamp (or sequence number), or a string (strings ar
 {
   style: "mapbox://styles/mapbox/streets-v9",
   zoom: 15,
-  icon: "default-icon",
+  defaultIcon: "default-icon",
   controls: true
 }
 ```

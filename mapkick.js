@@ -128,8 +128,8 @@
 
       function updateMap(element, data, options) {
         onLayersReady( function () {
-          if (options.route) {
-            recordRoutes(data, options.route);
+          if (options.routes) {
+            recordRoutes(data, options.routes);
             map.getSource("routes").setData(generateRoutesGeoJSON(data));
           }
           map.getSource("objects").setData(generateGeoJSON(data, options));
@@ -144,7 +144,7 @@
 
         for (var i = 0; i < data.length; i++) {
           var row = data[i];
-          var properties = Object.assign({icon: options.icon || "mapkick"}, row);
+          var properties = Object.assign({icon: options.defaultIcon || "mapkick"}, row);
           geojson.features.push({
             type: "Feature",
             geometry: {
@@ -174,7 +174,7 @@
             routes[route_id] = [];
           }
           routes[route_id].push(rowCoordinates(row));
-          if (routeOptions && routeOptions.limit && routes[route_id].length > routeOptions.limit) {
+          if (routeOptions && routeOptions.maxLength && routes[route_id].length > routeOptions.maxLength) {
             routes[route_id].shift();
           }
         }
@@ -284,7 +284,7 @@
         }
 
         onMapLoad( function () {
-          if (options.route) {
+          if (options.routes) {
             recordRoutes(data);
 
             map.addSource("routes", {
