@@ -63,10 +63,10 @@ Refresh data periodically from a remote source to create a live map
 new Mapkick.Map(id, url, {refresh: 10}) // seconds
 ```
 
-Show routes
+Show trails
 
 ```javascript
-new Mapkick.Map(id, url, {routes: true, refresh: 10})
+new Mapkick.Map(id, url, {trail: true, refresh: 10})
 ```
 
 Use the `id` attribute to identify objects
@@ -78,10 +78,10 @@ Use the `id` attribute to identify objects
 ]
 ```
 
-Limit route length
+Set trail length
 
 ```javascript
-new Mapkick.Map(id, url, {routes: {maxLength: 10}, refresh: 10})
+new Mapkick.Map(id, url, {trail: {len: 10}, refresh: 10})
 ```
 
 ## Replay Data

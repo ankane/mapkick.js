@@ -1,8 +1,8 @@
 ## 0.0.2 [unreleased]
 
-- Support `lat`, `lng`, and `lon`
+- Added `trail` and `replay` options
 - Added labels and tooltips
-- Added `routes` option
+- Support `lat`, `lng`, and `lon`
 
 ## 0.0.1
 

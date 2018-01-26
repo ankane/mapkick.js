@@ -14,7 +14,7 @@
   var Mapkick = {
     Map: function (element, data, options) {
       var map;
-      var routes = {};
+      var trails = {};
       var groupedData = {};
       var timestamps = [];
       var timeIndex = 0;
@@ -128,9 +128,9 @@
 
       function updateMap(element, data, options) {
         onLayersReady( function () {
-          if (options.routes) {
-            recordRoutes(data, options.routes);
-            map.getSource("routes").setData(generateRoutesGeoJSON(data));
+          if (options.trail) {
+            recordTrails(data, options.trail);
+            map.getSource("trails").setData(generateTrailsGeoJSON(data));
           }
           map.getSource("objects").setData(generateGeoJSON(data, options));
         });
@@ -162,25 +162,25 @@
         return [row.longitude || row.lng || row.lon, row.latitude || row.lat];
       }
 
-      function routeId(row) {
+      function trailId(row) {
         return row.id;
       }
 
-      function recordRoutes(data, routeOptions) {
+      function recordTrails(data, trailOptions) {
         for (var i = 0; i < data.length; i++) {
           var row = data[i];
-          var route_id = routeId(row);
-          if (!routes[route_id]) {
-            routes[route_id] = [];
+          var trail_id = trailId(row);
+          if (!trails[trail_id]) {
+            trails[trail_id] = [];
           }
-          routes[route_id].push(rowCoordinates(row));
-          if (routeOptions && routeOptions.maxLength && routes[route_id].length > routeOptions.maxLength) {
-            routes[route_id].shift();
+          trails[trail_id].push(rowCoordinates(row));
+          if (trailOptions && trailOptions.len && trails[trail_id].length > trailOptions.len) {
+            trails[trail_id].shift();
           }
         }
       }
 
-      function generateRoutesGeoJSON(data) {
+      function generateTrailsGeoJSON(data) {
         var geojson = {
           type: "FeatureCollection",
           features: []
@@ -192,7 +192,7 @@
             type: "Feature",
             geometry: {
               type: "LineString",
-              coordinates: routes[routeId(row)]
+              coordinates: trails[trailId(row)]
             }
           });
         }
@@ -284,17 +284,17 @@
         }
 
         onMapLoad( function () {
-          if (options.routes) {
-            recordRoutes(data);
+          if (options.trail) {
+            recordTrails(data);
 
-            map.addSource("routes", {
+            map.addSource("trails", {
               type: "geojson",
-              data: generateRoutesGeoJSON([])
+              data: generateTrailsGeoJSON([])
             });
 
             map.addLayer({
-              id: "routes",
-              source: "routes",
+              id: "trails",
+              source: "trails",
               type: "line",
               layout: {
                 "line-join": "round",
