@@ -1,4 +1,4 @@
-## 0.0.2 [unreleased]
+## 0.1.0
 
 - Added `trail` and `replay` options
 - Added labels and tooltips

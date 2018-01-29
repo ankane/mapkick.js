@@ -2,7 +2,7 @@
  * Mapkick.js
  * Create beautiful maps with one line of JavaScript
  * https://github.com/ankane/mapkick.js
- * v0.0.1
+ * v0.1.0
  * MIT License
  */
 
