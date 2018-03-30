@@ -1,3 +1,7 @@
+## 0.1.1 [unreleased]
+
+- Added module build
+
 ## 0.1.0
 
 - Added `trail` and `replay` options
