@@ -22,5 +22,8 @@
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^3.0.0"
+  },
+  "dependencies": {
+    "object-assign": "^4.1.1"
   }
 }

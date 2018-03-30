@@ -1,3 +1,5 @@
+import objectAssign from "object-assign";
+
 export default {
   Map: function (element, data, options) {
     let map;
@@ -133,7 +135,7 @@ export default {
       let i;
       for (i = 0; i < data.length; i++) {
         let row = data[i];
-        let properties = Object.assign({icon: options.defaultIcon || "mapkick"}, row);
+        let properties = objectAssign({icon: options.defaultIcon || "mapkick"}, row);
         geojson.features.push({
           type: "Feature",
           geometry: {
