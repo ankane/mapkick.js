@@ -121,8 +121,8 @@ Mapkick uses [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/). You must 
 [Download mapkick.js](https://raw.githubusercontent.com/ankane/mapkick.js/master/mapkick.js) and add in the `<head>` of your HTML file:
 
 ```html
-<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css" rel="stylesheet" />
-<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js"></script>
+<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css" rel="stylesheet" />
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js"></script>
 <script>
   mapboxgl.accessToken = "YOUR-TOKEN";
 </script>
