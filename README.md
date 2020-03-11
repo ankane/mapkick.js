@@ -147,4 +147,6 @@ To get started with development:
 ```sh
 git clone https://github.com/ankane/mapkick.js.git
 cd mapkick.js
+yarn install
+yarn build
 ```
