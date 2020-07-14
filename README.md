@@ -118,7 +118,7 @@ Times can be a `Date`, a timestamp (or sequence number), or a string (strings ar
 
 Mapkick uses [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/). You must first [create a Mapbox account](https://www.mapbox.com/signup/) to get an access token.
 
-[Download mapkick.js](https://raw.githubusercontent.com/ankane/mapkick.js/master/mapkick.js) and add in the `<head>` of your HTML file:
+[Download mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your HTML file:
 
 ```html
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
