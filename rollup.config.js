@@ -10,10 +10,9 @@ const external = Object.keys(pkg.peerDependencies || {});
 const esExternal = external.concat(Object.keys(pkg.dependencies || {}));
 const banner =
 `/*
- * Mapkick.js
+ * Mapkick.js v${pkg.version}
  * ${pkg.description}
  * ${pkg.repository.url}
- * v${pkg.version}
  * ${pkg.license} License
  */
 `;
