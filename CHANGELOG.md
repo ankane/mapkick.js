@@ -1,3 +1,7 @@
+## 0.2.0 (unreleased)
+
+- Reduced dependencies
+
 ## 0.1.1 (2018-03-29)
 
 - Added module build
