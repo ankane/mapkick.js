@@ -21,12 +21,12 @@
   "license": "MIT",
   "homepage": "https://github.com/ankane/mapkick.js",
   "devDependencies": {
-    "@rollup/plugin-buble": "^0.21.1",
-    "@rollup/plugin-commonjs": "^11.0.2",
-    "@rollup/plugin-node-resolve": "^7.1.1",
-    "eslint": "^5.16.0",
-    "rollup": "^1.11.3",
-    "rollup-plugin-uglify": "^6.0.2"
+    "@rollup/plugin-buble": "^1.0.1",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.2.1",
+    "eslint": "^8.8.0",
+    "rollup": "^3.9.1"
   },
   "dependencies": {
     "object-assign": "^4.1.1"
