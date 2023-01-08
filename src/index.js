@@ -152,20 +152,20 @@ class Map {
       return [row.longitude || row.lng || row.lon, row.latitude || row.lat]
     }
 
-    function trailId(row) {
+    function getTrailId(row) {
       return row.id
     }
 
     function recordTrails(data, trailOptions) {
       for (let i = 0; i < data.length; i++) {
         const row = data[i]
-        const trail_id = trailId(row)
-        if (!trails[trail_id]) {
-          trails[trail_id] = []
+        const trailId = getTrailId(row)
+        if (!trails[trailId]) {
+          trails[trailId] = []
         }
-        trails[trail_id].push(rowCoordinates(row))
-        if (trailOptions && trailOptions.len && trails[trail_id].length > trailOptions.len) {
-          trails[trail_id].shift()
+        trails[trailId].push(rowCoordinates(row))
+        if (trailOptions && trailOptions.len && trails[trailId].length > trailOptions.len) {
+          trails[trailId].shift()
         }
       }
     }
@@ -182,7 +182,7 @@ class Map {
           type: "Feature",
           geometry: {
             type: "LineString",
-            coordinates: trails[trailId(row)]
+            coordinates: trails[getTrailId(row)]
           }
         })
       }

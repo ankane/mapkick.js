@@ -9,6 +9,8 @@
   },
   "rules": {
     "no-var": "error",
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "prefer-const": "error",
+    "camelcase": "error"
   }
 }
