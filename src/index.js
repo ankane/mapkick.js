@@ -213,8 +213,8 @@ export default {
 
       // Create a popup, but don't add it to the map yet.
       let popup = new mapboxgl.Popup({
-          closeButton: false,
-          closeOnClick: false
+        closeButton: false,
+        closeOnClick: false
       });
 
       map.on("mouseenter", name, function(e) {
