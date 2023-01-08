@@ -253,12 +253,12 @@ export default {
       }
 
       map = new window.mapboxgl.Map({
-          container: element,
-          style: options.style || "mapbox://styles/mapbox/streets-v12",
-          dragRotate: false,
-          touchZoomRotate: false,
-          center: options.center || bounds.getCenter(),
-          zoom: options.zoom || 15
+        container: element,
+        style: options.style || "mapbox://styles/mapbox/streets-v12",
+        dragRotate: false,
+        touchZoomRotate: false,
+        center: options.center || bounds.getCenter(),
+        zoom: options.zoom || 15
       });
 
       if (options.controls) {
