@@ -101,15 +101,26 @@ class Map {
       }
     }
 
+    function showError(element, message) {
+      document.getElementById(element).textContent = message
+    }
+
     function fetchData(element, data, options, callback) {
       if (typeof data === "string") {
         getJSON(element, data, function (newData) {
           callback(element, newData, options)
         })
       } else if (typeof data === "function") {
-        data(function (newData) {
-          callback(element, newData, options)
-        })
+        try {
+          data(function (newData) {
+            callback(element, newData, options)
+          }, function (message) {
+            showError(element, message)
+          })
+        } catch (err) {
+          showError(element, "Error");
+          throw err;
+        }
       } else {
         callback(element, data, options)
       }
