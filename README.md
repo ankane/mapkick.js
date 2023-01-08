@@ -2,7 +2,22 @@
 
 Create beautiful, interactive maps with one line of JavaScript
 
-[View the demo](https://www.chartkick.com/mapkick)
+[View the demo](https://chartkick.com/mapkick)
+
+## Installation
+
+Mapkick uses [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/guides/). You must first [create a Mapbox account](https://account.mapbox.com/auth/signup/) to get an access token.
+
+Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your HTML file:
+
+```html
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+<script>
+  mapboxgl.accessToken = "YOUR-TOKEN";
+</script>
+<script src="mapkick.js"></script>
+```
 
 ## Getting Started
 
@@ -112,21 +127,6 @@ Times can be a `Date`, a timestamp (or sequence number), or a string (strings ar
   defaultIcon: "default-icon",
   controls: true
 }
-```
-
-## Installation
-
-Mapkick uses [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/). You must first [create a Mapbox account](https://www.mapbox.com/signup/) to get an access token.
-
-[Download mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your HTML file:
-
-```html
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet" />
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
-<script>
-  mapboxgl.accessToken = "YOUR-TOKEN";
-</script>
-<script src="mapkick.js"></script>
 ```
 
 ## History
