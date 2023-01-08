@@ -1,24 +1,23 @@
-let mapboxgl = window.mapboxgl
+const { mapboxgl } = window
 
 class Map {
   constructor(element, data, options) {
     let map
-    let trails = {}
-    let groupedData = {}
-    let timestamps = []
+    const trails = {}
+    const groupedData = {}
+    const timestamps = []
     let timeIndex = 0
-    let bounds
 
     function getJSON(element, url, success) {
       ajaxCall(url, success, function (jqXHR, textStatus, errorThrown) {
-        let message = (typeof errorThrown === "string") ? errorThrown : errorThrown.message
+        const message = (typeof errorThrown === "string") ? errorThrown : errorThrown.message
         // TODO show message
         console.log("ERROR: " + message)
       })
     }
 
     function ajaxCall(url, success, error) {
-      let $ = window.jQuery || window.Zepto || window.$
+      const $ = window.jQuery || window.Zepto || window.$
 
       if ($) {
         $.ajax({
@@ -28,7 +27,7 @@ class Map {
           error: error
         })
       } else {
-        let xhr = new XMLHttpRequest()
+        const xhr = new XMLHttpRequest()
         xhr.open("GET", url, true)
         xhr.setRequestHeader("Content-Type", "application/json")
         xhr.onload = function () {
@@ -62,8 +61,8 @@ class Map {
       // group data
       let i
       for (i = 0; i < data.length; i++) {
-        let row = data[i]
-        let ts = toTimestamp(row.time)
+        const row = data[i]
+        const ts = toTimestamp(row.time)
         if (ts) {
           if (!groupedData[ts]) {
             groupedData[ts] = []
@@ -127,15 +126,15 @@ class Map {
     }
 
     function generateGeoJSON(data, options) {
-      let geojson = {
+      const geojson = {
         type: "FeatureCollection",
         features: []
       }
 
       let i
       for (i = 0; i < data.length; i++) {
-        let row = data[i]
-        let properties = Object.assign({icon: options.defaultIcon || "mapkick", iconSize: options.defaultIcon ? 1 : 0.5}, row)
+        const row = data[i]
+        const properties = Object.assign({icon: options.defaultIcon || "mapkick", iconSize: options.defaultIcon ? 1 : 0.5}, row)
         geojson.features.push({
           type: "Feature",
           geometry: {
@@ -159,8 +158,8 @@ class Map {
 
     function recordTrails(data, trailOptions) {
       for (let i = 0; i < data.length; i++) {
-        let row = data[i]
-        let trail_id = trailId(row)
+        const row = data[i]
+        const trail_id = trailId(row)
         if (!trails[trail_id]) {
           trails[trail_id] = []
         }
@@ -172,13 +171,13 @@ class Map {
     }
 
     function generateTrailsGeoJSON(data) {
-      let geojson = {
+      const geojson = {
         type: "FeatureCollection",
         features: []
       }
 
       for (let i = 0; i < data.length; i++) {
-        let row = data[i]
+        const row = data[i]
         geojson.features.push({
           type: "Feature",
           geometry: {
@@ -214,7 +213,7 @@ class Map {
       })
 
       // Create a popup, but don't add it to the map yet.
-      let popup = new mapboxgl.Popup({
+      const popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false
       })
@@ -247,7 +246,7 @@ class Map {
     }
 
     function generateMap(element, data, options) {
-      let geojson = generateGeoJSON(data, options)
+      const geojson = generateGeoJSON(data, options)
       options = options || {}
 
       for (let i = 0; i < geojson.features.length; i++) {
@@ -299,8 +298,8 @@ class Map {
           })
         }
 
-        let scale = 2.6
-        let image = new Image(20 * scale, 48 * scale)
+        const scale = 2.6
+        const image = new Image(20 * scale, 48 * scale)
         // from https://docs.mapbox.com/help/getting-started/add-markers/#generic-marker-images
         image.src = "data:image/svg+xml;base64,PCEtLSBDcmVhdGUgYSBjdXN0b20gbWFwIHN0eWxlOiBodHRwczovL3N0dWRpby5tYXBib3guY29tIC0tPgo8c3ZnIGlkPSJtYXJrZXIiIGRhdGEtbmFtZT0ibWFya2VyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDIwIDQ4Ij4KICA8ZyBpZD0ibWFwYm94LW1hcmtlci1pY29uIj4KICAgIDxnIGlkPSJpY29uIj4KICAgICAgPGVsbGlwc2UgaWQ9InNoYWRvdyIgY3g9IjEwIiBjeT0iMjciIHJ4PSI5IiByeT0iNSIgZmlsbD0iI2M0YzRjNCIgb3BhY2l0eT0iMC4zIiBzdHlsZT0iaXNvbGF0aW9uOiBpc29sYXRlIi8+CiAgICAgIDxnIGlkPSJtYXNrIiBvcGFjaXR5PSIwLjMiPgogICAgICAgIDxnIGlkPSJncm91cCI+CiAgICAgICAgICA8cGF0aCBpZD0ic2hhZG93LTIiIGRhdGEtbmFtZT0ic2hhZG93IiBmaWxsPSIjYmZiZmJmIiBkPSJNMTAsMzJjNSwwLDktMi4yLDktNXMtNC01LTktNS05LDIuMi05LDVTNSwzMiwxMCwzMloiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgogICAgICAgIDwvZz4KICAgICAgPC9nPgogICAgICA8cGF0aCBpZD0iY29sb3IiIGZpbGw9IiNmODRkNGQiIHN0cm9rZT0iIzk1MTIxMiIgc3Ryb2tlLXdpZHRoPSIwLjUiIGQ9Ik0xOS4yNSwxMC40YTEzLjA2NjMsMTMuMDY2MywwLDAsMS0xLjQ2MDcsNS4yMjM1LDQxLjUyODEsNDEuNTI4MSwwLDAsMS0zLjI0NTksNS41NDgzYy0xLjE4MjksMS43MzY5LTIuMzY2MiwzLjI3ODQtMy4yNTQxLDQuMzg1OS0uNDQzOC41NTM2LS44MTM1Ljk5ODQtMS4wNzIxLDEuMzA0Ni0uMDg0NC4xLS4xNTcuMTg1Mi0uMjE2NC4yNTQ1LS4wNi0uMDctLjEzMjUtLjE1NjQtLjIxNzMtLjI1NzgtLjI1ODctLjMwODgtLjYyODQtLjc1NzEtMS4wNzIzLTEuMzE0Ny0uODg3OS0xLjExNTQtMi4wNzE0LTIuNjY2NC0zLjI1NDMtNC40MWE0Mi4yNjc3LDQyLjI2NzcsMCwwLDEtMy4yNDYzLTUuNTUzNUExMi45NzgsMTIuOTc4LDAsMCwxLC43NSwxMC40LDkuNDY1OSw5LjQ2NTksMCwwLDEsMTAsLjc1LDkuNDY1OSw5LjQ2NTksMCwwLDEsMTkuMjUsMTAuNFoiLz4KICAgICAgPHBhdGggaWQ9ImNpcmNsZSIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjOTUxMjEyIiBzdHJva2Utd2lkdGg9IjAuNSIgZD0iTTEzLjU1LDEwQTMuNTUsMy41NSwwLDEsMSwxMCw2LjQ1LDMuNTQ4NCwzLjU0ODQsMCwwLDEsMTMuNTUsMTBaIi8+CiAgICA8L2c+CiAgPC9nPgogIDxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSI0OCIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K"
         image.addEventListener("load", function () {
@@ -318,7 +317,7 @@ class Map {
     }
 
     let layersReady = false
-    let layersReadyQueue = []
+    const layersReadyQueue = []
     function onLayersReady(callback) {
       if (layersReady) {
         callback()
@@ -330,7 +329,7 @@ class Map {
     // main
 
     options = options || {}
-    bounds = new mapboxgl.LngLatBounds()
+    const bounds = new mapboxgl.LngLatBounds()
 
     if (options.replay) {
       fetchData(element, data, options, generateReplayMap)
