@@ -36,22 +36,23 @@ Create a map
 Data can be an array
 
 ```javascript
-new Mapkick.Map(id, [{latitude: 37.7829, longitude: -122.4190}])
+new Mapkick.Map("map", [{latitude: 37.7829, longitude: -122.4190}])
 ```
 
 Or a URL that returns JSON (same format as above)
 
 ```javascript
-new Mapkick.Map(id, url)
+new Mapkick.Map("map", "/restaurants")
 ```
 
-Or a function
+Or a callback
 
 ```javascript
-function fetchData(callback) {
-  callback(someData);
+function fetchData(success) {
+  success([{latitude: 37.7829, longitude: -122.4190}])
 }
-new Mapkick.Map(id, fetchData)
+
+new Mapkick.Map("map", fetchData)
 ```
 
 You can use `latitude`, `lat`, `longitude`, `lon`, and `lng`
@@ -75,13 +76,13 @@ You can specify an icon, label, and tooltip for each data point
 Refresh data periodically from a remote source to create a live map
 
 ```javascript
-new Mapkick.Map(id, url, {refresh: 10}) // seconds
+new Mapkick.Map("map", url, {refresh: 10}) // seconds
 ```
 
 Show trails
 
 ```javascript
-new Mapkick.Map(id, url, {trail: true, refresh: 10})
+new Mapkick.Map("map", url, {trail: true, refresh: 10})
 ```
 
 Use the `id` attribute to identify objects
@@ -96,13 +97,13 @@ Use the `id` attribute to identify objects
 Set trail length
 
 ```javascript
-new Mapkick.Map(id, url, {trail: {len: 10}, refresh: 10})
+new Mapkick.Map("map", url, {trail: {len: 10}, refresh: 10})
 ```
 
 ## Replay Data
 
 ```javascript
-new Mapkick.Map(id, data, {replay: true})
+new Mapkick.Map("map", data, {replay: true})
 ```
 
 Use the `id` attribute to identify objects and the `time` attribute for when the data was measured
