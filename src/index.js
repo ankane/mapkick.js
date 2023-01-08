@@ -74,7 +74,7 @@ class Map {
       }
 
       for (i in groupedData) {
-        if (groupedData.hasOwnProperty(i)) {
+        if (Object.prototype.hasOwnProperty.call(groupedData, i)) {
           timestamps.push(parseInt(i));
         }
       }
