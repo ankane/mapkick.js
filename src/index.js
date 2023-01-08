@@ -11,8 +11,7 @@ class Map {
     function getJSON(element, url, success) {
       ajaxCall(url, success, function (jqXHR, textStatus, errorThrown) {
         const message = (typeof errorThrown === "string") ? errorThrown : errorThrown.message
-        // TODO show message
-        console.log("ERROR: " + message)
+        showError(element, message)
       })
     }
 
