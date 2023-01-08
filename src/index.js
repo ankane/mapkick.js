@@ -296,9 +296,11 @@ export default {
           });
         }
 
-        // TODO only load marker when needed
-        // TODO allow other colors and sizes
-        map.loadImage("https://a.tiles.mapbox.com/v4/marker/pin-m+f86767.png?access_token=" + window.mapboxgl.accessToken, function(error, image) {
+        let scale = 1.3;
+        let image = new Image(20 * scale, 48 * scale);
+        // from https://docs.mapbox.com/help/getting-started/add-markers/#generic-marker-images
+        image.src = "data:image/svg+xml;base64,PCEtLSBDcmVhdGUgYSBjdXN0b20gbWFwIHN0eWxlOiBodHRwczovL3N0dWRpby5tYXBib3guY29tIC0tPgo8c3ZnIGlkPSJtYXJrZXIiIGRhdGEtbmFtZT0ibWFya2VyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDIwIDQ4Ij4KICA8ZyBpZD0ibWFwYm94LW1hcmtlci1pY29uIj4KICAgIDxnIGlkPSJpY29uIj4KICAgICAgPGVsbGlwc2UgaWQ9InNoYWRvdyIgY3g9IjEwIiBjeT0iMjciIHJ4PSI5IiByeT0iNSIgZmlsbD0iI2M0YzRjNCIgb3BhY2l0eT0iMC4zIiBzdHlsZT0iaXNvbGF0aW9uOiBpc29sYXRlIi8+CiAgICAgIDxnIGlkPSJtYXNrIiBvcGFjaXR5PSIwLjMiPgogICAgICAgIDxnIGlkPSJncm91cCI+CiAgICAgICAgICA8cGF0aCBpZD0ic2hhZG93LTIiIGRhdGEtbmFtZT0ic2hhZG93IiBmaWxsPSIjYmZiZmJmIiBkPSJNMTAsMzJjNSwwLDktMi4yLDktNXMtNC01LTktNS05LDIuMi05LDVTNSwzMiwxMCwzMloiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgogICAgICAgIDwvZz4KICAgICAgPC9nPgogICAgICA8cGF0aCBpZD0iY29sb3IiIGZpbGw9IiNmODRkNGQiIHN0cm9rZT0iIzk1MTIxMiIgc3Ryb2tlLXdpZHRoPSIwLjUiIGQ9Ik0xOS4yNSwxMC40YTEzLjA2NjMsMTMuMDY2MywwLDAsMS0xLjQ2MDcsNS4yMjM1LDQxLjUyODEsNDEuNTI4MSwwLDAsMS0zLjI0NTksNS41NDgzYy0xLjE4MjksMS43MzY5LTIuMzY2MiwzLjI3ODQtMy4yNTQxLDQuMzg1OS0uNDQzOC41NTM2LS44MTM1Ljk5ODQtMS4wNzIxLDEuMzA0Ni0uMDg0NC4xLS4xNTcuMTg1Mi0uMjE2NC4yNTQ1LS4wNi0uMDctLjEzMjUtLjE1NjQtLjIxNzMtLjI1NzgtLjI1ODctLjMwODgtLjYyODQtLjc1NzEtMS4wNzIzLTEuMzE0Ny0uODg3OS0xLjExNTQtMi4wNzE0LTIuNjY2NC0zLjI1NDMtNC40MWE0Mi4yNjc3LDQyLjI2NzcsMCwwLDEtMy4yNDYzLTUuNTUzNUExMi45NzgsMTIuOTc4LDAsMCwxLC43NSwxMC40LDkuNDY1OSw5LjQ2NTksMCwwLDEsMTAsLjc1LDkuNDY1OSw5LjQ2NTksMCwwLDEsMTkuMjUsMTAuNFoiLz4KICAgICAgPHBhdGggaWQ9ImNpcmNsZSIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjOTUxMjEyIiBzdHJva2Utd2lkdGg9IjAuNSIgZD0iTTEzLjU1LDEwQTMuNTUsMy41NSwwLDEsMSwxMCw2LjQ1LDMuNTQ4NCwzLjU0ODQsMCwwLDEsMTMuNTUsMTBaIi8+CiAgICA8L2c+CiAgPC9nPgogIDxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSI0OCIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K";
+        image.addEventListener("load", function() {
           map.addImage("mapkick-15", image);
 
           addLayer("objects", geojson);
