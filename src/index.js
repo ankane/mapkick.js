@@ -253,7 +253,7 @@ export default {
 
       map = new window.mapboxgl.Map({
           container: element,
-          style: options.style || "mapbox://styles/mapbox/streets-v9",
+          style: options.style || "mapbox://styles/mapbox/streets-v12",
           dragRotate: false,
           touchZoomRotate: false,
           center: options.center || bounds.getCenter(),

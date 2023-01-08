@@ -1,5 +1,6 @@
 ## 0.2.0 (unreleased)
 
+- Updated default style to `streets-v12`
 - Reduced dependencies
 
 ## 0.1.1 (2018-03-29)
