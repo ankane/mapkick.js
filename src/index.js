@@ -1,7 +1,7 @@
 let mapboxgl = window.mapboxgl;
 
-export default {
-  Map: function (element, data, options) {
+class Map {
+  constructor(element, data, options) {
     let map;
     let trails = {};
     let groupedData = {};
@@ -344,4 +344,6 @@ export default {
       }
     }
   }
-};
+}
+
+export default { Map };
