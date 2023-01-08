@@ -4,6 +4,8 @@ Create beautiful, interactive maps with one line of JavaScript
 
 [View the demo](https://chartkick.com/mapkick)
 
+[![Build Status](https://github.com/ankane/mapkick.js/workflows/build/badge.svg?branch=master)](https://github.com/ankane/mapkick.js/actions)
+
 ## Installation
 
 Mapkick uses [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/guides/). You must first [create a Mapbox account](https://account.mapbox.com/auth/signup/) to get an access token.
