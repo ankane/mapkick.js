@@ -1,3 +1,5 @@
+let mapboxgl = window.mapboxgl;
+
 export default {
   Map: function (element, data, options) {
     let map;
@@ -102,7 +104,7 @@ export default {
 
     function fetchData(element, data, options, callback) {
       if (typeof data === "string") {
-        getJSON(element, data, function (newData, status, xhr) {
+        getJSON(element, data, function (newData) {
           callback(element, newData, options);
         });
       } else if (typeof data === "function") {
@@ -252,7 +254,7 @@ export default {
         bounds.extend(geojson.features[i].geometry.coordinates);
       }
 
-      map = new window.mapboxgl.Map({
+      map = new mapboxgl.Map({
         container: element,
         style: options.style || "mapbox://styles/mapbox/streets-v12",
         dragRotate: false,
@@ -328,7 +330,7 @@ export default {
     // main
 
     options = options || {};
-    bounds = new window.mapboxgl.LngLatBounds();
+    bounds = new mapboxgl.LngLatBounds();
 
     if (options.replay) {
       fetchData(element, data, options, generateReplayMap);
