@@ -2,6 +2,7 @@
 
 - Updated default style to `streets-v12`
 - Reduced dependencies
+- Dropped support for AJAX through jQuery and Zepto
 
 ## 0.1.1 (2018-03-29)
 

@@ -9,35 +9,17 @@ class Map {
     let timeIndex = 0
 
     function getJSON(element, url, success) {
-      ajaxCall(url, success, function (jqXHR, textStatus, errorThrown) {
-        const message = (typeof errorThrown === "string") ? errorThrown : errorThrown.message
-        showError(element, message)
-      })
-    }
-
-    function ajaxCall(url, success, error) {
-      const $ = window.jQuery || window.Zepto || window.$
-
-      if ($) {
-        $.ajax({
-          dataType: "json",
-          url: url,
-          success: success,
-          error: error
-        })
-      } else {
-        const xhr = new XMLHttpRequest()
-        xhr.open("GET", url, true)
-        xhr.setRequestHeader("Content-Type", "application/json")
-        xhr.onload = function () {
-          if (xhr.status === 200) {
-            success(JSON.parse(xhr.responseText), xhr.statusText, xhr)
-          } else {
-            error(xhr, "error", xhr.statusText)
-          }
+      const xhr = new XMLHttpRequest()
+      xhr.open("GET", url, true)
+      xhr.setRequestHeader("Content-Type", "application/json")
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          success(JSON.parse(xhr.responseText))
+        } else {
+          showError(element, xhr.statusText)
         }
-        xhr.send()
       }
+      xhr.send()
     }
 
     function onMapLoad(callback) {
@@ -117,8 +99,8 @@ class Map {
             showError(element, message)
           })
         } catch (err) {
-          showError(element, "Error");
-          throw err;
+          showError(element, "Error")
+          throw err
         }
       } else {
         callback(element, data, options)
