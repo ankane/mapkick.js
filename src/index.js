@@ -40,8 +40,7 @@ class Map {
 
     function generateReplayMap(element, data, options) {
       // group data
-      let i
-      for (i = 0; i < data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         const row = data[i]
         const ts = toTimestamp(row.time)
         if (ts) {
@@ -53,7 +52,7 @@ class Map {
         }
       }
 
-      for (i in groupedData) {
+      for (const i in groupedData) {
         if (Object.prototype.hasOwnProperty.call(groupedData, i)) {
           timestamps.push(parseInt(i))
         }
@@ -123,8 +122,7 @@ class Map {
         features: []
       }
 
-      let i
-      for (i = 0; i < data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         const row = data[i]
         const properties = Object.assign({icon: options.defaultIcon || "mapkick", iconSize: options.defaultIcon ? 1 : 0.5}, row)
         geojson.features.push({
