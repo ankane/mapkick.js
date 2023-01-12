@@ -1,5 +1,16 @@
 const { mapboxgl } = window
 
+function getElement(element) {
+  if (typeof element === "string") {
+    const elementId = element
+    element = document.getElementById(element)
+    if (!element) {
+      throw new Error("No element with id " + elementId)
+    }
+  }
+  return element
+}
+
 class Map {
   constructor(element, data, options) {
     let map
@@ -8,13 +19,7 @@ class Map {
     const timestamps = []
     let timeIndex = 0
 
-    if (typeof element === "string") {
-      const elementId = element
-      element = document.getElementById(element)
-      if (!element) {
-        throw new Error("No element with id " + elementId)
-      }
-    }
+    element = getElement(element)
 
     function getJSON(element, url, success) {
       const xhr = new XMLHttpRequest()
