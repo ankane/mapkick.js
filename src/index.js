@@ -351,4 +351,14 @@ class Map {
   }
 }
 
-export default { Map }
+const Mapkick = {}
+Mapkick.Map = Map
+
+// not ideal, but allows for simpler integration
+if (typeof window !== "undefined" && !window.Mapkick) {
+  window.Mapkick = Mapkick
+
+  window.dispatchEvent(new Event("mapkick:load"))
+}
+
+export default Mapkick
