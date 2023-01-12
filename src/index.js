@@ -222,7 +222,9 @@ class Map {
       })
 
       map.on("mouseenter", name, function (e) {
-        if (e.features[0].properties.tooltip) {
+        const tooltip = e.features[0].properties.tooltip
+
+        if (tooltip) {
           // Change the cursor style as a UI indicator.
           map.getCanvas().style.cursor = "pointer"
 
@@ -231,8 +233,12 @@ class Map {
           // Populate the popup and set its coordinates
           // based on the feature found.
           popup.setLngLat(e.features[0].geometry.coordinates)
-            .setText(e.features[0].properties.tooltip)
-            .addTo(map)
+          if (tooltipOptions.html) {
+            popup.setHTML(tooltip)
+          } else {
+            popup.setText(tooltip)
+          }
+          popup.addTo(map)
 
           // fix blurriness for non-retina screens
           // https://github.com/mapbox/mapbox-gl-js/pull/3258
@@ -335,6 +341,7 @@ class Map {
     // main
 
     options = options || {}
+    const tooltipOptions = options.tooltips || {}
     const bounds = new mapboxgl.LngLatBounds()
 
     if (options.replay) {

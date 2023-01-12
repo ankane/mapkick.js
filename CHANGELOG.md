@@ -1,5 +1,6 @@
 ## 0.2.0 (unreleased)
 
+- Added `html` option for tooltips
 - Updated default style to `streets-v12`
 - Reduced dependencies
 - Dropped support for AJAX through jQuery and Zepto

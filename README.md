@@ -130,7 +130,8 @@ Times can be a `Date`, a timestamp (or sequence number), or a string (strings ar
   style: "mapbox://styles/mapbox/streets-v9",
   zoom: 15,
   defaultIcon: "default-icon",
-  controls: true
+  controls: true,
+  tooltips: {html: true} // [unreleased]
 }
 ```
 
