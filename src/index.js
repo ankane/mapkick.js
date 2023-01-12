@@ -351,8 +351,9 @@ class Map {
   }
 }
 
-const Mapkick = {}
-Mapkick.Map = Map
+const Mapkick = {
+  Map: Map
+}
 
 // not ideal, but allows for simpler integration
 if (typeof window !== "undefined" && !window.Mapkick) {
