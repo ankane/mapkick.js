@@ -243,6 +243,9 @@ class Map {
         bounds.extend(geojson.features[i].geometry.coordinates)
       }
 
+      // remove any child elements
+      document.getElementById(element).textContent = ""
+
       map = new mapboxgl.Map({
         container: element,
         style: options.style || "mapbox://styles/mapbox/streets-v12",
