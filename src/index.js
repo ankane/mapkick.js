@@ -8,6 +8,14 @@ class Map {
     const timestamps = []
     let timeIndex = 0
 
+    if (typeof element === "string") {
+      const elementId = element
+      element = document.getElementById(element)
+      if (!element) {
+        throw new Error("No element with id " + elementId)
+      }
+    }
+
     function getJSON(element, url, success) {
       const xhr = new XMLHttpRequest()
       xhr.open("GET", url, true)
@@ -82,7 +90,7 @@ class Map {
     }
 
     function showError(element, message) {
-      document.getElementById(element).textContent = message
+      element.textContent = message
     }
 
     function fetchData(element, data, options, callback) {
@@ -244,7 +252,7 @@ class Map {
       }
 
       // remove any child elements
-      document.getElementById(element).textContent = ""
+      element.textContent = ""
 
       map = new mapboxgl.Map({
         container: element,
