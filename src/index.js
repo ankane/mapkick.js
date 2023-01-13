@@ -230,13 +230,14 @@ class Map {
       const panMap = function (map, popup) {
         const style = window.getComputedStyle(popup.getElement())
         const matrix = new DOMMatrixReadOnly(style.transform)
-        const padding = 10;
-        const top = matrix.m42;
-        const left = matrix.m41;
+        const padding = 10
+        const extra = 5
+        const top = matrix.m42
+        const left = matrix.m41
 
         // TODO add right and bottom
         if (top < padding || left < padding) {
-          map.panBy([Math.min(left - padding, 0), Math.min(top - padding, 0)]);
+          map.panBy([Math.min(left - padding - extra, 0), Math.min(top - padding - extra, 0)])
         }
       }
 
