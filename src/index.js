@@ -217,6 +217,8 @@ class Map {
         }
       })
 
+      const hover = !("hover" in tooltipOptions) || tooltipOptions.hover
+
       const popupOptions = {
         closeButton: false,
         closeOnClick: !hover
@@ -282,8 +284,6 @@ class Map {
 
         panMap(map, popup)
       }
-
-      const hover = !("hover" in tooltipOptions) || tooltipOptions.hover
 
       if (!hover) {
         map.on("click", name, function(e) {
