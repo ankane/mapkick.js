@@ -418,6 +418,12 @@ class Map {
         }, options.refresh * 1000)
       }
     }
+
+    this.map = map
+  }
+
+  getMapObject() {
+    return this.map
   }
 }
 
