@@ -215,11 +215,29 @@ class Map {
         }
       })
 
-      // Create a popup, but don't add it to the map yet.
-      const popup = new mapboxgl.Popup({
+      const popupOptions = {
         closeButton: false,
         closeOnClick: !hover
-      })
+      }
+      if (!hover) {
+        popupOptions.anchor = "bottom"
+      }
+
+      // Create a popup, but don't add it to the map yet.
+      const popup = new mapboxgl.Popup(popupOptions)
+
+      const panMap = function (map, popup) {
+        const style = window.getComputedStyle(popup.getElement())
+        const matrix = new DOMMatrixReadOnly(style.transform)
+        const padding = 10;
+        const top = matrix.m42;
+        const left = matrix.m41;
+
+        // TODO add right and bottom
+        if (top < padding || left < padding) {
+          map.panBy([Math.min(left - padding, 0), Math.min(top - padding, 0)]);
+        }
+      }
 
       const showPopup = function (e) {
         const tooltip = e.features[0].properties.tooltip
@@ -258,6 +276,8 @@ class Map {
         if (popup._container.offsetWidth % 2 !== 0) {
           popup._container.style.width = popup._container.offsetWidth + 1 + "px"
         }
+
+        panMap(map, popup)
       }
 
       const hover = !("hover" in tooltipOptions) || tooltipOptions.hover
