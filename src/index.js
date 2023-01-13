@@ -223,9 +223,10 @@ class Map {
         popupOptions.anchor = "bottom"
       }
 
-      // Create a popup, but don't add it to the map yet.
+      // create a popup
       const popup = new mapboxgl.Popup(popupOptions)
 
+      // ensure tooltip is visible
       const panMap = function (map, popup) {
         const style = window.getComputedStyle(popup.getElement())
         const matrix = new DOMMatrixReadOnly(style.transform)
@@ -261,8 +262,7 @@ class Map {
           popup.options.offset = 14
         }
 
-        // Populate the popup and set its coordinates
-        // based on the feature found.
+        // add the tooltip
         popup.setLngLat(e.features[0].geometry.coordinates)
         if (tooltipOptions.html) {
           popup.setHTML(tooltip)
