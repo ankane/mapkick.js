@@ -234,7 +234,7 @@ class Map {
       const panMap = function (map, popup) {
         const style = window.getComputedStyle(popup.getElement())
         const matrix = new DOMMatrixReadOnly(style.transform)
-        const padding = 10
+        const padding = 5
         const extra = 5
         const top = matrix.m42
         const left = matrix.m41
