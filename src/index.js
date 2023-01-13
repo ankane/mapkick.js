@@ -324,14 +324,18 @@ class Map {
       // remove any child elements
       element.textContent = ""
 
-      map = new mapboxgl.Map({
+      const mapOptions = {
         container: element,
         style: options.style || "mapbox://styles/mapbox/streets-v12",
         dragRotate: false,
         touchZoomRotate: false,
         center: options.center || bounds.getCenter(),
         zoom: options.zoom || 15
-      })
+      }
+      if (!options.style) {
+        mapOptions.projection = "mercator"
+      }
+      map = new mapboxgl.Map(mapOptions)
 
       if (options.controls) {
         map.addControl(new mapboxgl.NavigationControl({showCompass: false}))
