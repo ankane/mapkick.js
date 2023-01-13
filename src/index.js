@@ -199,6 +199,8 @@ class Map {
         data: geojson
       })
 
+      // use a symbol layer for markers for performance
+      // https://docs.mapbox.com/help/getting-started/add-markers/#approach-1-adding-markers-inside-a-map
       map.addLayer({
         id: name,
         source: name,
