@@ -218,8 +218,55 @@ class Map {
       // Create a popup, but don't add it to the map yet.
       const popup = new mapboxgl.Popup({
         closeButton: false,
-        closeOnClick: false
+        closeOnClick: !hover
       })
+
+      const showPopup = function (e) {
+        const tooltip = e.features[0].properties.tooltip
+
+        if (!tooltip) {
+          return
+        }
+
+        if (e.features[0].properties.icon === "mapkick") {
+          popup.options.offset = {
+            "top": [0, 14],
+            "top-left": [0, 14],
+            "top-right": [0, 14],
+            "bottom": [0, -40],
+            "bottom-left": [0, -40],
+            "bottom-right": [0, -40],
+            "left": [14, 0],
+            "right": [-14, 0]
+          }
+        } else {
+          popup.options.offset = 14
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(e.features[0].geometry.coordinates)
+        if (tooltipOptions.html) {
+          popup.setHTML(tooltip)
+        } else {
+          popup.setText(tooltip)
+        }
+        popup.addTo(map)
+
+        // fix blurriness for non-retina screens
+        // https://github.com/mapbox/mapbox-gl-js/pull/3258
+        if (popup._container.offsetWidth % 2 !== 0) {
+          popup._container.style.width = popup._container.offsetWidth + 1 + "px"
+        }
+      }
+
+      const hover = !("hover" in tooltipOptions) || tooltipOptions.hover
+
+      if (!hover) {
+        map.on("click", name, function(e) {
+          showPopup(e)
+        })
+      }
 
       map.on("mouseenter", name, function (e) {
         const tooltip = e.features[0].properties.tooltip
@@ -228,29 +275,18 @@ class Map {
           // Change the cursor style as a UI indicator.
           map.getCanvas().style.cursor = "pointer"
 
-          popup.options.offset = e.features[0].properties.icon === "mapkick" ? 40 : 14
-
-          // Populate the popup and set its coordinates
-          // based on the feature found.
-          popup.setLngLat(e.features[0].geometry.coordinates)
-          if (tooltipOptions.html) {
-            popup.setHTML(tooltip)
-          } else {
-            popup.setText(tooltip)
-          }
-          popup.addTo(map)
-
-          // fix blurriness for non-retina screens
-          // https://github.com/mapbox/mapbox-gl-js/pull/3258
-          if (popup._container.offsetWidth % 2 !== 0) {
-            popup._container.style.width = popup._container.offsetWidth + 1 + "px"
+          if (hover) {
+            showPopup(e)
           }
         }
       })
 
       map.on("mouseleave", name, function () {
         map.getCanvas().style.cursor = ""
-        popup.remove()
+
+        if (hover) {
+          popup.remove()
+        }
       })
     }
 

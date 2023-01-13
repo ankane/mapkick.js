@@ -46,6 +46,12 @@
         new Mapkick.Map("html-tooltips", [{latitude: 37.7829, longitude: -122.4190, tooltip: "<b>Hello</b>"}], {tooltips: {html: true}});
       </script>
 
+      <h1>No Hover</h1>
+      <div id="no-hover" class="map"></div>
+      <script>
+        new Mapkick.Map("no-hover", [{latitude: 42, longitude: -110, tooltip: "Place A"}, {latitude: 35, longitude: -100, tooltip: "Place B"}], {tooltips: {hover: false}});
+      </script>
+
       <!-- <h1>Muni</h1>
       <div id="muni" class="map"></div>
       <script>

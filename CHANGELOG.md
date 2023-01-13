@@ -1,5 +1,6 @@
 ## 0.2.0 (unreleased)
 
+- Added `hover` option for tooltips
 - Added `html` option for tooltips
 - Updated default style to `streets-v12`
 - Reduced dependencies
