@@ -9,6 +9,8 @@ function getElement(element) {
   return element
 }
 
+const maps = {}
+
 class Map {
   constructor(element, data, options) {
     const { mapboxgl } = window
@@ -20,6 +22,10 @@ class Map {
     let timeIndex = 0
 
     element = getElement(element)
+
+    if (element.id) {
+      maps[element.id] = this
+    }
 
     function getJSON(element, url, success) {
       const xhr = new XMLHttpRequest()
@@ -443,7 +449,8 @@ class Map {
 }
 
 const Mapkick = {
-  Map: Map
+  Map: Map,
+  maps: maps
 }
 
 // not ideal, but allows for simpler integration
