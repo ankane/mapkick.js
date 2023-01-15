@@ -64,6 +64,24 @@
         new Mapkick.Map("remote", "remote.json");
       </script>
 
+      <h1>Callback Success</h1>
+      <div id="callback-success" class="map"></div>
+      <script>
+        function fetchData(success, fail) {
+          success([{latitude: 37.7829, longitude: -122.4190}])
+        }
+        new Mapkick.Map("callback-success", fetchData);
+      </script>
+
+      <h1>Callback Fail</h1>
+      <div id="callback-fail" class="map"></div>
+      <script>
+        function fetchData(success, fail) {
+          fail("Data not available")
+        }
+        new Mapkick.Map("callback-fail", fetchData);
+      </script>
+
       <!-- <h1>Muni</h1>
       <div id="muni" class="map"></div>
       <script>
