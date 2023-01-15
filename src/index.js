@@ -353,7 +353,6 @@ class Map {
         const tooltip = e.features[0].properties.tooltip
 
         if (tooltip) {
-          // Change the cursor style as a UI indicator.
           map.getCanvas().style.cursor = "pointer"
 
           if (hover) {
