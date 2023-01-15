@@ -290,13 +290,14 @@ class Map {
       }
 
       const showPopup = function (e) {
-        const tooltip = e.features[0].properties.tooltip
+        const feature = selectedFeature(e)
+        const tooltip = feature.properties.tooltip
 
         if (!tooltip) {
           return
         }
 
-        if (e.features[0].properties.icon === "mapkick") {
+        if (feature.properties.icon === "mapkick") {
           popup.options.offset = {
             "top": [0, 14],
             "top-left": [0, 14],
@@ -312,7 +313,7 @@ class Map {
         }
 
         // add the tooltip
-        popup.setLngLat(e.features[0].geometry.coordinates)
+        popup.setLngLat(feature.geometry.coordinates)
         if (tooltipOptions.html) {
           popup.setHTML(tooltip)
         } else {
@@ -329,11 +330,17 @@ class Map {
         panMap(map, popup)
       }
 
+      // TODO improve
+      const selectedFeature = function (e) {
+        const features = e.features
+        return features[0]
+      }
+
       if (!hover) {
         let currentPoint = null
 
         map.on("click", name, function (e) {
-          const point = e.features[0].id
+          const point = selectedFeature(e).id
           if (point !== currentPoint) {
             showPopup(e)
             currentPoint = point
@@ -350,7 +357,7 @@ class Map {
       }
 
       map.on("mouseenter", name, function (e) {
-        const tooltip = e.features[0].properties.tooltip
+        const tooltip = selectedFeature(e).properties.tooltip
 
         if (tooltip) {
           map.getCanvas().style.cursor = "pointer"
