@@ -1,5 +1,3 @@
-const { mapboxgl } = window
-
 function getElement(element) {
   if (typeof element === "string") {
     const elementId = element
@@ -13,6 +11,8 @@ function getElement(element) {
 
 class Map {
   constructor(element, data, options) {
+    const { mapboxgl } = window
+
     let map
     const trails = {}
     const groupedData = {}
@@ -140,6 +140,7 @@ class Map {
         const properties = Object.assign({icon: options.defaultIcon || "mapkick", iconSize: options.defaultIcon ? 1 : 0.5}, row)
         geojson.features.push({
           type: "Feature",
+          id: i,
           geometry: {
             type: "Point",
             coordinates: rowCoordinates(row),
@@ -221,7 +222,7 @@ class Map {
 
       const popupOptions = {
         closeButton: false,
-        closeOnClick: !hover
+        closeOnClick: false
       }
       if (!hover) {
         popupOptions.anchor = "bottom"
@@ -286,8 +287,22 @@ class Map {
       }
 
       if (!hover) {
-        map.on("click", name, function(e) {
-          showPopup(e)
+        let currentPoint = null
+
+        map.on("click", name, function (e) {
+          const point = e.features[0].id
+          if (point !== currentPoint) {
+            showPopup(e)
+            currentPoint = point
+            e.mapkickPopupOpened = true
+          }
+        })
+
+        map.on("click", function (e) {
+          if (!e.mapkickPopupOpened) {
+            popup.remove()
+            currentPoint = null
+          }
         })
       }
 
