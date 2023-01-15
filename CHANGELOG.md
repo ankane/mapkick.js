@@ -2,7 +2,7 @@
 
 - Added `hover` option for tooltips
 - Added `html` option for tooltips
-- Added `getMapObject` function
+- Added `getMapObject` and `destroy` functions
 - Added `maps` property
 - Updated default style to `streets-v12`
 - Reduced dependencies

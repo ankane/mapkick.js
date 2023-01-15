@@ -370,7 +370,7 @@ class Map {
       })
     }
 
-    function generateMap(element, data, options) {
+    const generateMap = (element, data, options) => {
       const geojson = generateGeoJSON(data, options)
       options = options || {}
 
@@ -405,6 +405,8 @@ class Map {
         }
         map.fitBounds(bounds, {padding: 40, animate: false, maxZoom: 15})
       }
+
+      this.map = map
 
       onMapLoad(function () {
         if (options.trail) {
@@ -467,17 +469,31 @@ class Map {
       fetchData(element, data, options, generateMap)
 
       if (options.refresh) {
-        setInterval(function () {
+        this.intervalId = setInterval(function () {
           fetchData(element, data, options, updateMap)
         }, options.refresh * 1000)
       }
     }
-
-    this.map = map
   }
 
   getMapObject() {
     return this.map
+  }
+
+  destroy() {
+    this.stopRefresh()
+
+    if (this.map) {
+      this.map.remove()
+      this.map = null
+    }
+  }
+
+  stopRefresh() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId)
+      this.intervalId = null
+    }
   }
 }
 
