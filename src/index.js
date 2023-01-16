@@ -185,7 +185,13 @@ class Map {
 
       for (let i = 0; i < data.length; i++) {
         const row = data[i]
-        const properties = Object.assign({icon: options.defaultIcon || "mapkick", iconSize: options.defaultIcon ? 1 : 0.5}, row)
+        const properties = Object.assign({}, row)
+
+        if (!properties.icon) {
+          properties.icon = options.defaultIcon || "mapkick"
+        }
+        properties.mapkickIconSize = properties.icon === "mapkick" ? 0.5 : 1
+
         geojson.features.push({
           type: "Feature",
           id: i,
@@ -257,7 +263,7 @@ class Map {
         layout: {
           "icon-image": "{icon}-15",
           "icon-allow-overlap": true,
-          "icon-size": {type: "identity", property: "iconSize"},
+          "icon-size": {type: "identity", property: "mapkickIconSize"},
           "text-field": "{label}",
           "text-size": 11,
           "text-anchor": "top",
