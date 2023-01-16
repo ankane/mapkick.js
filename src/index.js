@@ -25,6 +25,11 @@ function createMarkerImage(color) {
   svg.setAttribute("width", width)
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`)
 
+  // check for hex or named color
+  if (!/^#([0-9a-f]{3}){1,2}$/i.test(color) && !/^[a-z]+$/i.test(color)) {
+    throw new Error("Invalid color")
+  }
+
   // set color
   svg.querySelector("*[fill='#3FB1CE']").setAttribute("fill", color)
 
