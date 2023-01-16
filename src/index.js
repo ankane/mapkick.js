@@ -330,10 +330,21 @@ class Map {
         panMap(map, popup)
       }
 
-      // TODO improve
+      const getLatitude = function (feature) {
+        return feature.geometry.coordinates[1]
+      }
+
       const selectedFeature = function (e) {
         const features = e.features
-        return features[0]
+        let selected = features[0]
+        for (let i = 1; i < features.length; i++) {
+          const feature = features[i]
+          // no need to handle ties since this is stable
+          if (getLatitude(feature) < getLatitude(selected)) {
+            selected = feature
+          }
+        }
+        return selected
       }
 
       if (!hover) {
