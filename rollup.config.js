@@ -17,6 +17,8 @@ const banner =
  */
 `;
 
+const minBanner = `/*! Mapkick.js v${pkg.version} | ${pkg.license} License */`;
+
 export default [
   {
     input: input,
@@ -38,7 +40,8 @@ export default [
     output: {
       name: outputName,
       file: pkg.main.replace(/\.js$/, ".min.js"),
-      format: "umd"
+      format: "umd",
+      banner: minBanner
     },
     external: external,
     plugins: [
