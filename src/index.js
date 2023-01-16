@@ -450,7 +450,8 @@ class Map {
           })
         }
 
-        const image = createMarkerImage("#f84d4d")
+        const color = markerOptions.color || "#f84d4d"
+        const image = createMarkerImage(color)
         image.addEventListener("load", function () {
           map.addImage("mapkick-15", image)
 
@@ -479,6 +480,7 @@ class Map {
 
     options = options || {}
     const tooltipOptions = options.tooltips || {}
+    const markerOptions = options.markers || {}
     const bounds = new mapboxgl.LngLatBounds()
 
     if (options.replay) {

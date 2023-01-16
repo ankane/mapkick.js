@@ -131,7 +131,8 @@ Times can be a `Date`, a timestamp (or sequence number), or a string (strings ar
   zoom: 15,
   defaultIcon: "default-icon",
   controls: true,
-  tooltips: {hover: false, html: true} // [unreleased]
+  tooltips: {hover: false, html: true}, // [unreleased]
+  markers: {color: "#f84d4d"}           // [unreleased]
 }
 ```
 
