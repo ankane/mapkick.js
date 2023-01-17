@@ -417,9 +417,9 @@ class Map {
       // remove any child elements
       element.textContent = ""
 
-      const isMapLibre = !("accessToken" in library) || /^1\.1[45]/.test(library.version)
       let style = options.style
       if (!style) {
+        const isMapLibre = !("accessToken" in library) || /^1\.1[45]/.test(library.version)
         if (isMapLibre) {
           throw new Error("style required for MapLibre")
         } else {
