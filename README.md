@@ -109,13 +109,23 @@ new Mapkick.Map("map", data, {tooltips: {hover: false, html: true}})
 Map style
 
 ```javascript
-new Mapkick.Map("map", data, {style: "mapbox://styles/mapbox/streets-v12"})
+new Mapkick.Map("map", data, {style: "mapbox://styles/mapbox/outdoors-v12"})
 ```
 
 Zoom and controls
 
 ```javascript
 new Mapkick.Map("map", data, {zoom: 15, controls: true})
+```
+
+### Global Options
+
+To set options for all of your maps, use: [unreleased]
+
+```javascript
+Mapkick.options = {
+  style: "mapbox://styles/mapbox/outdoors-v12"
+}
 ```
 
 ## Live Updates
