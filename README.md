@@ -90,7 +90,7 @@ You can specify an icon, label, and tooltip for each data point
 }
 ```
 
-[Maki icons](https://www.mapbox.com/maki-icons/) are supported
+[Maki icons](https://www.mapbox.com/maki-icons/) are supported (depending on the map style, only some icons may be available)
 
 ## Options
 
