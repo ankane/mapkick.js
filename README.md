@@ -48,7 +48,7 @@ Create a map
 <div id="map" style="height: 400px;"></div>
 
 <script>
-  new Mapkick.Map("map", [{latitude: 37.7829, longitude: -122.4190}]);
+  new Mapkick.Map("map", [{latitude: 37.7829, longitude: -122.4190}])
 </script>
 ```
 
