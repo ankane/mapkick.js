@@ -418,13 +418,18 @@ class Map {
       element.textContent = ""
 
       const isMapLibre = !("accessToken" in library) || /^1\.1[45]/.test(library.version)
-      if (isMapLibre && !options.style) {
-        throw new Error("style required for MapLibre")
+      let style = options.style
+      if (!style) {
+        if (isMapLibre) {
+          throw new Error("style required for MapLibre")
+        } else {
+          style = "mapbox://styles/mapbox/streets-v12"
+        }
       }
 
       const mapOptions = {
         container: element,
-        style: options.style || "mapbox://styles/mapbox/streets-v12",
+        style: style,
         dragRotate: false,
         touchZoomRotate: false,
         center: options.center || bounds.getCenter(),
