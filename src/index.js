@@ -55,7 +55,7 @@ const maps = {}
 
 class Map {
   constructor(element, data, options) {
-    if (!Mapkick.library) {
+    if (!Mapkick.library && typeof window !== "undefined") {
       Mapkick.library = window.mapboxgl || window.maplibregl || null
     }
 
