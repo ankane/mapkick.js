@@ -7,6 +7,7 @@
 - Added `getMapObject` and `destroy` functions
 - Added `maps` property
 - Added `accessToken` option
+- Added global options
 - Updated default style to `streets-v12`
 - Reduced dependencies
 - Dropped support for AJAX through jQuery and Zepto
