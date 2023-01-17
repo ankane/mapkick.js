@@ -438,6 +438,9 @@ class Map {
       if (!options.style) {
         mapOptions.projection = "mercator"
       }
+      if (options.accessToken) {
+        mapOptions.accessToken = options.accessToken
+      }
       map = new library.Map(mapOptions)
 
       if (options.controls) {
