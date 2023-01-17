@@ -21,10 +21,10 @@ Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your
 ```html
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet" />
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
-<script>
-  mapboxgl.accessToken = "YOUR-TOKEN";
-</script>
 <script src="mapkick.js"></script>
+<script>
+  mapboxgl.accessToken = "YOUR-TOKEN"
+</script>
 ```
 
 ### MapLibre [unreleased]
@@ -35,6 +35,9 @@ Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your
 <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
 <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
 <script src="mapkick.js"></script>
+<script>
+  Mapkick.options = {style: "https://demotiles.maplibre.org/style.json"}
+</script>
 ```
 
 ## Getting Started
@@ -89,6 +92,32 @@ You can specify an icon, label, and tooltip for each data point
 
 [Maki icons](https://www.mapbox.com/maki-icons/) are supported
 
+## Options
+
+Markers [unreleased]
+
+```javascript
+new Mapkick.Map("map", data, {markers: {color: "#f84d4d"}}
+```
+
+Tooltips [unreleased]
+
+```javascript
+new Mapkick.Map("map", data, {tooltips: {hover: false, html: true}})
+```
+
+Map style
+
+```javascript
+new Mapkick.Map("map", data, {style: "mapbox://styles/mapbox/streets-v12"})
+```
+
+Zoom and controls
+
+```javascript
+new Mapkick.Map("map", data, {zoom: 15, controls: true})
+```
+
 ## Live Updates
 
 Refresh data periodically from a remote source to create a live map
@@ -136,19 +165,6 @@ Use the `id` attribute to identify objects and the `time` attribute for when the
 ```
 
 Times can be a `Date`, a timestamp (or sequence number), or a string (strings are parsed)
-
-## Map Options
-
-```javascript
-{
-  style: "mapbox://styles/mapbox/streets-v9",
-  zoom: 15,
-  defaultIcon: "default-icon",
-  controls: true,
-  tooltips: {hover: false, html: true}, // [unreleased]
-  markers: {color: "#f84d4d"}           // [unreleased]
-}
-```
 
 ## History
 
