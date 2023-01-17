@@ -1,5 +1,6 @@
 ## 0.2.0 (unreleased)
 
+- Added support for MapLibre
 - Added `color` option for markers
 - Added `hover` option for tooltips
 - Added `html` option for tooltips

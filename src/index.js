@@ -9,14 +9,14 @@ function getElement(element) {
   return element
 }
 
-function createMarkerImage(color) {
+function createMarkerImage(library, color) {
   // set height to center vertically
   const height = 71
   const width = 27
   const scale = 2
 
   // get marker svg
-  const svg = (new window.mapboxgl.Marker())._element.querySelector("svg")
+  const svg = (new library.Marker())._element.querySelector("svg")
 
   // make displayable and center vertically
   svg.removeAttribute("display")
@@ -55,7 +55,14 @@ const maps = {}
 
 class Map {
   constructor(element, data, options) {
-    const { mapboxgl } = window
+    if (!Mapkick.library) {
+      Mapkick.library = window.mapboxgl || window.maplibregl || null
+    }
+
+    const library = Mapkick.library
+    if (!library) {
+      throw new Error("No mapping library found")
+    }
 
     let map
     const trails = {}
@@ -283,7 +290,7 @@ class Map {
       }
 
       // create a popup
-      const popup = new mapboxgl.Popup(popupOptions)
+      const popup = new library.Popup(popupOptions)
 
       // ensure tooltip is visible
       const panMap = function (map, popup) {
@@ -410,6 +417,11 @@ class Map {
       // remove any child elements
       element.textContent = ""
 
+      const isMapLibre = false // TODO
+      if (isMapLibre && !options.style) {
+        throw new Error("style required for MapLibre")
+      }
+
       const mapOptions = {
         container: element,
         style: options.style || "mapbox://styles/mapbox/streets-v12",
@@ -421,10 +433,10 @@ class Map {
       if (!options.style) {
         mapOptions.projection = "mercator"
       }
-      map = new mapboxgl.Map(mapOptions)
+      map = new library.Map(mapOptions)
 
       if (options.controls) {
-        map.addControl(new mapboxgl.NavigationControl({showCompass: false}))
+        map.addControl(new library.NavigationControl({showCompass: false}))
       }
 
       if (!options.zoom) {
@@ -462,7 +474,7 @@ class Map {
         }
 
         const color = markerOptions.color || "#f84d4d"
-        const image = createMarkerImage(color)
+        const image = createMarkerImage(library, color)
         image.addEventListener("load", function () {
           map.addImage("mapkick-15", image)
 
@@ -490,9 +502,10 @@ class Map {
     // main
 
     options = options || {}
+    options = Object.assign({}, Mapkick.options, options)
     const tooltipOptions = options.tooltips || {}
     const markerOptions = options.markers || {}
-    const bounds = new mapboxgl.LngLatBounds()
+    const bounds = new library.LngLatBounds()
 
     if (options.replay) {
       fetchData(element, data, options, generateReplayMap)
@@ -530,7 +543,13 @@ class Map {
 
 const Mapkick = {
   Map: Map,
-  maps: maps
+  maps: maps,
+  options: {},
+  library: null
+}
+
+Mapkick.use = function (library) {
+  Mapkick.library = library
 }
 
 // not ideal, but allows for simpler integration
