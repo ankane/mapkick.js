@@ -10,7 +10,11 @@ For charts, check out [Chartkick.js](https://github.com/ankane/chartkick.js)
 
 ## Installation
 
-Mapkick uses [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/guides/). You must first [create a Mapbox account](https://account.mapbox.com/auth/signup/) to get an access token.
+Mapkick supports Mapbox and MapLibre.
+
+### Mapbox
+
+First, [create a Mapbox account](https://account.mapbox.com/auth/signup/) to get an access token.
 
 Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your HTML file:
 
@@ -20,6 +24,16 @@ Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your
 <script>
   mapboxgl.accessToken = "YOUR-TOKEN";
 </script>
+<script src="mapkick.js"></script>
+```
+
+### MapLibre [unreleased]
+
+Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your HTML file:
+
+```html
+<link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+<script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
 <script src="mapkick.js"></script>
 ```
 
