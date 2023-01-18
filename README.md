@@ -27,7 +27,7 @@ Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your
 </script>
 ```
 
-### MapLibre [unreleased]
+### MapLibre
 
 Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your HTML file:
 
@@ -69,8 +69,9 @@ new Mapkick.Map("map", "/restaurants")
 Or a callback
 
 ```javascript
-function fetchData(success) {
+function fetchData(success, fail) {
   success([{latitude: 37.7829, longitude: -122.4190}])
+  // or fail("Data not available")
 }
 
 new Mapkick.Map("map", fetchData)
@@ -94,13 +95,13 @@ You can specify an icon, label, and tooltip for each data point
 
 ## Options
 
-Markers [unreleased]
+Markers
 
 ```javascript
 new Mapkick.Map("map", data, {markers: {color: "#f84d4d"}}
 ```
 
-Tooltips [unreleased]
+Tooltips
 
 ```javascript
 new Mapkick.Map("map", data, {tooltips: {hover: false, html: true}})
@@ -120,7 +121,7 @@ new Mapkick.Map("map", data, {zoom: 15, controls: true})
 
 ### Global Options
 
-To set options for all of your maps, use: [unreleased]
+To set options for all of your maps, use:
 
 ```javascript
 Mapkick.options = {

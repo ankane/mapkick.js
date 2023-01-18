@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2023-01-17)
 
 - Added support for MapLibre
 - Added `color` option for markers
