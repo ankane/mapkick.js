@@ -564,7 +564,10 @@ Mapkick.use = function (library) {
 if (typeof window !== "undefined" && !window.Mapkick) {
   window.Mapkick = Mapkick
 
-  window.dispatchEvent(new Event("mapkick:load"))
+  // use setTimeout so mapping library can come later in same JS file
+  setTimeout(function () {
+    window.dispatchEvent(new Event("mapkick:load"))
+  }, 0)
 }
 
 export default Mapkick
