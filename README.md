@@ -2,7 +2,7 @@
 
 Create beautiful, interactive maps with one line of JavaScript
 
-[See it in action](https://chartkick.com/mapkick)
+[See it in action](https://chartkick.com/mapkick-js)
 
 For charts, check out [Chartkick.js](https://github.com/ankane/chartkick.js)
 
