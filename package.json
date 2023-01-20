@@ -6,8 +6,11 @@
   "main": "./dist/mapkick.js",
   "module": "./dist/mapkick.esm.js",
   "exports": {
-    "require": "./dist/mapkick.js",
-    "import": "./dist/mapkick.esm.js"
+    ".": {
+      "require": "./dist/mapkick.js",
+      "import": "./dist/mapkick.esm.js"
+    },
+    "./bundle": "./dist/mapkick.bundle.js"
   },
   "scripts": {
     "build": "rollup -c",
@@ -17,6 +20,11 @@
     "type": "git",
     "url": "https://github.com/ankane/mapkick.js"
   },
+  "files": [
+    "bundle",
+    "dist",
+    "licenses"
+  ],
   "author": "ankane",
   "license": "MIT",
   "homepage": "https://github.com/ankane/mapkick.js",
@@ -26,6 +34,9 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.2.1",
     "eslint": "^8.8.0",
-    "rollup": "^3.9.1"
+    "mapbox-gl": "1.13.3",
+    "postcss": "^8.4.21",
+    "rollup": "^3.9.1",
+    "rollup-plugin-postcss": "^4.0.2"
   }
 }

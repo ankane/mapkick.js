@@ -1,3 +1,7 @@
+## 0.2.1 (unreleased)
+
+- Added bundle
+
 ## 0.2.0 (2023-01-17)
 
 - Added support for MapLibre

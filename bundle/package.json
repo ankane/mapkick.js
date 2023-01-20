@@ -1,0 +1,6 @@
+{
+  "name": "mapkick-bundle",
+  "private": true,
+  "module": "../dist/mapkick.bundle.js",
+  "exports": "../dist/mapkick.bundle.js"
+}
