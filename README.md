@@ -196,5 +196,5 @@ To get started with development:
 git clone https://github.com/ankane/mapkick.js.git
 cd mapkick.js
 npm install
-npm run build
+npm run build-dev
 ```
