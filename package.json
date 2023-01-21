@@ -14,6 +14,7 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "build-dev": "rollup -c --dev",
     "lint": "eslint src"
   },
   "repository": {

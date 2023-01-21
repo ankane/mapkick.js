@@ -174,7 +174,7 @@ const bundleBanner =
  */
 `;
 
-export default [
+const bundles = [
   {
     input: input,
     output: {
@@ -218,20 +218,27 @@ export default [
       buble()
     ]
   },
-  {
-    input: "bundle/index.js",
-    output: {
-      name: outputName,
-      file: pkg.main.replace(/\.js$/, ".bundle.js"),
-      format: "umd",
-      banner: bundleBanner
-    },
-    external: [],
-    plugins: [
-      resolve(),
-      commonjs(),
-      postcss({plugins: []}),
-      buble()
-    ]
-  }
 ];
+
+export default commandLineArgs => {
+  if (commandLineArgs.dev !== true) {
+    bundles.push({
+      input: "bundle/index.js",
+      output: {
+        name: outputName,
+        file: pkg.main.replace(/\.js$/, ".bundle.js"),
+        format: "umd",
+        banner: bundleBanner
+      },
+      external: [],
+      plugins: [
+        resolve(),
+        commonjs(),
+        postcss({plugins: []}),
+        buble()
+      ]
+    });
+  }
+  delete commandLineArgs.dev;
+  return bundles;
+};
