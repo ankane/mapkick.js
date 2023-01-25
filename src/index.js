@@ -11,7 +11,7 @@ function getElement(element) {
 
 function createMarkerImage(library, color) {
   // set height to center vertically
-  const height = 71
+  const height = 41
   const width = 27
   const scale = 2
 
@@ -198,6 +198,8 @@ class Map {
           properties.icon = options.defaultIcon || "mapkick"
         }
         properties.mapkickIconSize = properties.icon === "mapkick" ? 0.5 : 1
+        properties.mapkickIconAnchor = properties.icon === "mapkick" ? "bottom" : "center"
+        properties.mapkickIconOffset = properties.icon === "mapkick" ? [0, 10] : [0, 0]
 
         geojson.features.push({
           type: "Feature",
@@ -263,6 +265,22 @@ class Map {
 
       // use a symbol layer for markers for performance
       // https://docs.mapbox.com/help/getting-started/add-markers/#approach-1-adding-markers-inside-a-map
+      // use separate layers to prevent labels from overlapping markers
+      map.addLayer({
+        id: `${name}-text`,
+        source: name,
+        type: "symbol",
+        layout: {
+          "text-field": "{label}",
+          "text-size": 11,
+          "text-anchor": "top",
+          "text-offset": [0, 1]
+        },
+        paint: {
+          "text-halo-color": "rgba(255, 255, 255, 1)",
+          "text-halo-width": 1
+        }
+      })
       map.addLayer({
         id: name,
         source: name,
@@ -271,15 +289,8 @@ class Map {
           "icon-image": "{icon}-15",
           "icon-allow-overlap": true,
           "icon-size": {type: "identity", property: "mapkickIconSize"},
-          "text-field": "{label}",
-          "text-size": 11,
-          "text-anchor": "top",
-          "text-offset": [0, 1],
-          "text-optional": true
-        },
-        paint: {
-          "text-halo-color": "rgba(255, 255, 255, 1)",
-          "text-halo-width": 1
+          "icon-anchor": {type: "identity", property: "mapkickIconAnchor"},
+          "icon-offset": {type: "identity", property: "mapkickIconOffset"}
         }
       })
 
