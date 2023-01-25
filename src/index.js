@@ -275,7 +275,7 @@ class Map {
           "text-size": 11,
           "text-anchor": "top",
           "text-offset": [0, 1],
-          "text-allow-overlap": true
+          "text-optional": true
         }
       })
 

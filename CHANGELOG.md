@@ -1,3 +1,7 @@
+## 0.2.2 (unreleased)
+
+- Fixed overlapping labels
+
 ## 0.2.1 (2023-01-19)
 
 - Added bundle
