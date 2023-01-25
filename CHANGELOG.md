@@ -1,5 +1,6 @@
 ## 0.2.2 (unreleased)
 
+- Updated labels to match map style
 - Fixed overlapping labels
 
 ## 0.2.1 (2023-01-19)

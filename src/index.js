@@ -276,6 +276,10 @@ class Map {
           "text-anchor": "top",
           "text-offset": [0, 1],
           "text-optional": true
+        },
+        paint: {
+          "text-halo-color": "rgba(255, 255, 255, 1)",
+          "text-halo-width": 1
         }
       })
 
