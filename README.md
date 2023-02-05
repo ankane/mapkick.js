@@ -95,16 +95,22 @@ You can specify an icon, label, and tooltip for each data point
 
 ## Options
 
-Markers
+Marker color
 
 ```javascript
 new Mapkick.Map("map", data, {markers: {color: "#f84d4d"}}
 ```
 
-Tooltips
+Show tooltips on click instead of hover
 
 ```javascript
-new Mapkick.Map("map", data, {tooltips: {hover: false, html: true}})
+new Mapkick.Map("map", data, {tooltips: {hover: false}})
+```
+
+Allow HTML in tooltips (must sanitize manually)
+
+```javascript
+new Mapkick.Map("map", data, {tooltips: {html: true}})
 ```
 
 Map style
