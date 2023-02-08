@@ -300,6 +300,8 @@ class BaseMap {
     }
 
     function addLayer(name, geojson) {
+      const centersById = {}
+
       map.addSource(name, {
         type: "geojson",
         data: geojson
@@ -349,6 +351,12 @@ class BaseMap {
 
         const labelName = `${name}-text`
         const labelData = generateLabelGeoJSON(geojson)
+
+        for (let i = 0; i < labelData.features.length; i++) {
+          const feature = labelData.features[i]
+          centersById[feature.id] = feature.geometry.coordinates
+        }
+
         map.addSource(labelName, {
           type: "geojson",
           data: labelData
@@ -401,7 +409,7 @@ class BaseMap {
         const feature = selectedFeature(e)
         const tooltip = feature.properties.tooltip
 
-        if (!tooltip || mapType === "area") {
+        if (!tooltip) {
           return
         }
 
@@ -420,8 +428,15 @@ class BaseMap {
           popup.options.offset = 14
         }
 
+        let coordinates
+        if (mapType === "point") {
+          coordinates = feature.geometry.coordinates
+        } else {
+          coordinates = centersById[feature.id]
+        }
+
         // add the tooltip
-        popup.setLngLat(feature.geometry.coordinates)
+        popup.setLngLat(coordinates)
         if (tooltipOptions.html) {
           popup.setHTML(tooltip)
         } else {
@@ -478,7 +493,7 @@ class BaseMap {
       map.on("mouseenter", name, function (e) {
         const tooltip = selectedFeature(e).properties.tooltip
 
-        if (tooltip && mapType !== "area") {
+        if (tooltip) {
           map.getCanvas().style.cursor = "pointer"
 
           if (hover) {
