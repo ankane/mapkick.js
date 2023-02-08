@@ -117,7 +117,7 @@ You can specify a label and tooltip for each data point
 
 ```javascript
 {
-  geometry: {type: "MultiPolygon", coordinates: ...},
+  geometry: {type: "Polygon", coordinates: ...},
   label: "Hot Chicken Takeover",
   tooltip: "5 stars"
 }
