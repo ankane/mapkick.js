@@ -442,28 +442,31 @@ class BaseMap {
       })
     }
 
+    function extendBounds(bounds, geometry) {
+      if (geometry.type === "Point") {
+        bounds.extend(geometry.coordinates)
+      } else if (geometry.type === "Polygon") {
+        const coordinates = geometry.coordinates[0]
+        for (let j = 0; j < coordinates.length; j++) {
+          bounds.extend(coordinates[j])
+        }
+      } else if (geometry.type === "MultiPolygon") {
+        const coordinates = geometry.coordinates
+        for (let j = 0; j < coordinates.length; j++) {
+          const polygon = coordinates[j][0]
+          for (let k = 0; k < polygon.length; k++) {
+            bounds.extend(polygon[k])
+          }
+        }
+      }
+    }
+
     const generateMap = (element, data, options) => {
       const geojson = generateGeoJSON(data, options)
       options = options || {}
 
       for (let i = 0; i < geojson.features.length; i++) {
-        const geometry = geojson.features[i].geometry
-        if (geometry.type === "Point") {
-          bounds.extend(geometry.coordinates)
-        } else if (geometry.type === "Polygon") {
-          const coordinates = geometry.coordinates
-          for (let j = 0; j < coordinates.length; j++) {
-            bounds.extend(coordinates[j])
-          }
-        } else if (geometry.type === "MultiPolygon") {
-          const coordinates = geometry.coordinates
-          for (let j = 0; j < coordinates.length; j++) {
-            const polygon = coordinates[j]
-            for (let k = 0; k < polygon.length; k++) {
-              bounds.extend(polygon[k])
-            }
-          }
-        }
+        extendBounds(bounds, geojson.features[i].geometry)
       }
 
       // remove any child elements
