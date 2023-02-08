@@ -52,6 +52,20 @@ Create a map
 </script>
 ```
 
+## Maps
+
+Point map
+
+```javascript
+new Mapkick.Map("map", [{latitude: 37.7829, longitude: -122.4190}])
+```
+
+Area map (experimental) [unreleased]
+
+```javascript
+new Mapkick.AreaMap("map", [{geometry: {type: "Polygon", coordinates: ...}}])
+```
+
 ## Data
 
 Data can be an array
@@ -77,7 +91,9 @@ function fetchData(success, fail) {
 new Mapkick.Map("map", fetchData)
 ```
 
-You can use `latitude`, `lat`, `longitude`, `lon`, and `lng`
+### Point Map
+
+Use `latitude` or `lat` for latitude and `longitude`, `lon`, or `lng` for longitude
 
 You can specify an icon, label, and tooltip for each data point
 
@@ -93,12 +109,32 @@ You can specify an icon, label, and tooltip for each data point
 
 [Maki icons](https://www.mapbox.com/maki-icons/) are supported (depending on the map style, only some icons may be available)
 
-## Options
+### Area Map
 
-Marker color
+Use `geometry` with a GeoJSON `Polygon` or `MultiPolygon`
+
+You can specify a label and tooltip for each data point
 
 ```javascript
-new Mapkick.Map("map", data, {markers: {color: "#f84d4d"}}
+{
+  geometry: {type: "MultiPolygon", coordinates: ...},
+  label: "Hot Chicken Takeover",
+  tooltip: "5 stars"
+}
+```
+
+## Options
+
+Map style
+
+```javascript
+new Mapkick.Map("map", data, {style: "mapbox://styles/mapbox/outdoors-v12"})
+```
+
+Zoom and controls
+
+```javascript
+new Mapkick.Map("map", data, {zoom: 15, controls: true})
 ```
 
 Show tooltips on click instead of hover
@@ -113,16 +149,10 @@ Allow HTML in tooltips (must sanitize manually)
 new Mapkick.Map("map", data, {tooltips: {html: true}})
 ```
 
-Map style
+Marker color
 
 ```javascript
-new Mapkick.Map("map", data, {style: "mapbox://styles/mapbox/outdoors-v12"})
-```
-
-Zoom and controls
-
-```javascript
-new Mapkick.Map("map", data, {zoom: 15, controls: true})
+new Mapkick.Map("map", data, {markers: {color: "#f84d4d"}}
 ```
 
 ### Global Options
