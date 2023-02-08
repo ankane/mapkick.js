@@ -361,7 +361,30 @@ class BaseMap {
         // TODO make configurable
         const fillColor = "#0090ff"
 
-        // TODO decide which layer to place above
+        // place below labels
+        const layers = map.getStyle().layers
+        let beforeId
+        for (let i = layers.length - 1; i >= 0; i--) {
+          const layer = layers[i]
+          // TODO improve
+          if (!(layer.metadata && layer.metadata["mapbox:featureComponent"] === "place-labels")) {
+            break
+          }
+          beforeId = layer.id
+        }
+
+        const outlineId = `${name}-outline`
+        map.addLayer({
+          id: outlineId,
+          source: name,
+          type: "line",
+          paint: {
+            "line-color": fillColor,
+            "line-opacity": 0.7,
+            "line-width": 1
+          }
+        }, beforeId)
+
         map.addLayer({
           id: name,
           source: name,
@@ -370,18 +393,7 @@ class BaseMap {
             "fill-color": fillColor,
             "fill-opacity": 0.3
           }
-        })
-
-        map.addLayer({
-          id: `${name}-outline`,
-          source: name,
-          type: "line",
-          paint: {
-            "line-color": fillColor,
-            "line-opacity": 0.7,
-            "line-width": 1
-          }
-        })
+        }, outlineId)
 
         const labelName = `${name}-text`
         const labelData = generateLabelGeoJSON(geojson)
