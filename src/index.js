@@ -373,8 +373,7 @@ class BaseMap {
           }
         })
       } else {
-        // TODO make configurable
-        const fillColor = "#0090ff"
+        const fillColor = markerOptions.color || "#0090ff"
 
         const beforeId = layerBeforeFill(map)
 
