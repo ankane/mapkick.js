@@ -54,7 +54,7 @@ function createMarkerImage(library, color) {
 const maps = {}
 
 class BaseMap {
-  constructor(element, data, options) {
+  constructor(element, data, options, mapType) {
     if (!Mapkick.library && typeof window !== "undefined") {
       Mapkick.library = window.mapboxgl || window.maplibregl || null
     }
@@ -193,21 +193,29 @@ class BaseMap {
       for (let i = 0; i < data.length; i++) {
         const row = data[i]
         const properties = Object.assign({}, row)
+        let geometry
 
-        if (!properties.icon) {
-          properties.icon = options.defaultIcon || "mapkick"
+        if (mapType === "point") {
+          if (!properties.icon) {
+            properties.icon = options.defaultIcon || "mapkick"
+          }
+          properties.mapkickIconSize = properties.icon === "mapkick" ? 0.5 : 1
+          properties.mapkickIconAnchor = properties.icon === "mapkick" ? "bottom" : "center"
+          properties.mapkickIconOffset = properties.icon === "mapkick" ? [0, 10] : [0, 0]
+
+          geometry = {
+            type: "Point",
+            coordinates: rowCoordinates(row)
+          }
+        } else {
+          geometry = row.geometry
+          delete properties.geometry
         }
-        properties.mapkickIconSize = properties.icon === "mapkick" ? 0.5 : 1
-        properties.mapkickIconAnchor = properties.icon === "mapkick" ? "bottom" : "center"
-        properties.mapkickIconOffset = properties.icon === "mapkick" ? [0, 10] : [0, 0]
 
         geojson.features.push({
           type: "Feature",
           id: i,
-          geometry: {
-            type: "Point",
-            coordinates: rowCoordinates(row),
-          },
+          geometry: geometry,
           properties: properties
         })
       }
@@ -263,36 +271,49 @@ class BaseMap {
         data: geojson
       })
 
-      // use a symbol layer for markers for performance
-      // https://docs.mapbox.com/help/getting-started/add-markers/#approach-1-adding-markers-inside-a-map
-      // use separate layers to prevent labels from overlapping markers
-      map.addLayer({
-        id: `${name}-text`,
-        source: name,
-        type: "symbol",
-        layout: {
-          "text-field": "{label}",
-          "text-size": 11,
-          "text-anchor": "top",
-          "text-offset": [0, 1]
-        },
-        paint: {
-          "text-halo-color": "rgba(255, 255, 255, 1)",
-          "text-halo-width": 1
-        }
-      })
-      map.addLayer({
-        id: name,
-        source: name,
-        type: "symbol",
-        layout: {
-          "icon-image": "{icon}-15",
-          "icon-allow-overlap": true,
-          "icon-size": {type: "identity", property: "mapkickIconSize"},
-          "icon-anchor": {type: "identity", property: "mapkickIconAnchor"},
-          "icon-offset": {type: "identity", property: "mapkickIconOffset"}
-        }
-      })
+      if (mapType === "point") {
+        // use a symbol layer for markers for performance
+        // https://docs.mapbox.com/help/getting-started/add-markers/#approach-1-adding-markers-inside-a-map
+        // use separate layers to prevent labels from overlapping markers
+        map.addLayer({
+          id: `${name}-text`,
+          source: name,
+          type: "symbol",
+          layout: {
+            "text-field": "{label}",
+            "text-size": 11,
+            "text-anchor": "top",
+            "text-offset": [0, 1]
+          },
+          paint: {
+            "text-halo-color": "rgba(255, 255, 255, 1)",
+            "text-halo-width": 1
+          }
+        })
+        map.addLayer({
+          id: name,
+          source: name,
+          type: "symbol",
+          layout: {
+            "icon-image": "{icon}-15",
+            "icon-allow-overlap": true,
+            "icon-size": {type: "identity", property: "mapkickIconSize"},
+            "icon-anchor": {type: "identity", property: "mapkickIconAnchor"},
+            "icon-offset": {type: "identity", property: "mapkickIconOffset"}
+          }
+        })
+      } else {
+        map.addLayer({
+          id: name,
+          source: name,
+          type: "fill",
+          paint: {
+            "fill-color": "#0090ff",
+            "fill-opacity": 0.3
+          }
+        })
+        // TODO add label
+      }
 
       const hover = !("hover" in tooltipOptions) || tooltipOptions.hover
 
@@ -326,7 +347,7 @@ class BaseMap {
         const feature = selectedFeature(e)
         const tooltip = feature.properties.tooltip
 
-        if (!tooltip) {
+        if (!tooltip || mapType === "area") {
           return
         }
 
@@ -403,7 +424,7 @@ class BaseMap {
       map.on("mouseenter", name, function (e) {
         const tooltip = selectedFeature(e).properties.tooltip
 
-        if (tooltip) {
+        if (tooltip && mapType !== "area") {
           map.getCanvas().style.cursor = "pointer"
 
           if (hover) {
@@ -426,7 +447,23 @@ class BaseMap {
       options = options || {}
 
       for (let i = 0; i < geojson.features.length; i++) {
-        bounds.extend(geojson.features[i].geometry.coordinates)
+        const geometry = geojson.features[i].geometry
+        if (geometry.type === "Point") {
+          bounds.extend(geometry.coordinates)
+        } else if (geometry.type === "Polygon") {
+          const coordinates = geometry.coordinates
+          for (let j = 0; j < coordinates.length; j++) {
+            bounds.extend(coordinates[j])
+          }
+        } else if (geometry.type === "MultiPolygon") {
+          const coordinates = geometry.coordinates
+          for (let j = 0; j < coordinates.length; j++) {
+            const polygon = coordinates[j]
+            for (let k = 0; k < polygon.length; k++) {
+              bounds.extend(polygon[k])
+            }
+          }
+        }
       }
 
       // remove any child elements
@@ -564,10 +601,21 @@ class BaseMap {
   }
 }
 
-class Map extends BaseMap {}
+class Map extends BaseMap {
+  constructor(element, data, options) {
+    super(element, data, options, "point")
+  }
+}
+
+class AreaMap extends BaseMap {
+  constructor(element, data, options) {
+    super(element, data, options, "area")
+  }
+}
 
 const Mapkick = {
   Map: Map,
+  AreaMap: AreaMap,
   maps: maps,
   options: {},
   library: null

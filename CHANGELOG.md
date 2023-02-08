@@ -1,3 +1,7 @@
+## 0.2.3 (unreleased)
+
+- Added experimental support for area maps
+
 ## 0.2.2 (2023-01-24)
 
 - Updated labels to match map style
