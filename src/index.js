@@ -465,7 +465,9 @@ class BaseMap {
           popup._container.style.width = popup._container.offsetWidth + 1 + "px"
         }
 
-        panMap(map, popup)
+        if (mapType !== "area") {
+          panMap(map, popup)
+        }
       }
 
       const getLatitude = function (feature) {
