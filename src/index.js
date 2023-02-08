@@ -265,6 +265,40 @@ class BaseMap {
       return geojson
     }
 
+    function generateLabelGeoJSON(data) {
+      const geojson = {
+        type: "FeatureCollection",
+        features: []
+      }
+
+      for (let i = 0; i < data.features.length; i++) {
+        const feature = data.features[i]
+        let coordinates
+
+        // use center for now
+        const bounds = new library.LngLatBounds()
+        extendBounds(bounds, feature.geometry)
+        if (!bounds.isEmpty()) {
+          const center = bounds.getCenter()
+          coordinates = [center.lng, center.lat]
+        }
+
+        if (coordinates) {
+          geojson.features.push({
+            type: "Feature",
+            id: i,
+            geometry: {
+              type: "Point",
+              coordinates: coordinates
+            },
+            properties: feature.properties
+          })
+        }
+      }
+
+      return geojson
+    }
+
     function addLayer(name, geojson) {
       map.addSource(name, {
         type: "geojson",
@@ -312,7 +346,27 @@ class BaseMap {
             "fill-opacity": 0.3
           }
         })
-        // TODO add label
+
+        const labelName = `${name}-text`
+        const labelData = generateLabelGeoJSON(geojson)
+        map.addSource(labelName, {
+          type: "geojson",
+          data: labelData
+        })
+
+        map.addLayer({
+          id: `${name}-text`,
+          source: labelName,
+          type: "symbol",
+          layout: {
+            "text-field": "{label}",
+            "text-size": 11
+          },
+          paint: {
+            "text-halo-color": "rgba(255, 255, 255, 1)",
+            "text-halo-width": 1
+          }
+        })
       }
 
       const hover = !("hover" in tooltipOptions) || tooltipOptions.hover
