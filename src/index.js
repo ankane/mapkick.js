@@ -203,12 +203,27 @@ class BaseMap {
           properties.mapkickIconAnchor = properties.icon === "mapkick" ? "bottom" : "center"
           properties.mapkickIconOffset = properties.icon === "mapkick" ? [0, 10] : [0, 0]
 
+          const coordinates = rowCoordinates(row)
+
+          if (!coordinates[1]) {
+            throw new Error("missing latitude")
+          }
+
+          if (!coordinates[0]) {
+            throw new Error("missing longitude")
+          }
+
           geometry = {
             type: "Point",
-            coordinates: rowCoordinates(row)
+            coordinates: coordinates
           }
         } else {
           geometry = row.geometry
+
+          if (!geometry) {
+            throw new Error("missing geometry")
+          }
+
           delete properties.geometry
         }
 
