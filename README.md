@@ -125,16 +125,10 @@ You can specify a label and tooltip for each data point
 
 ## Options
 
-Map style
+Marker color
 
 ```javascript
-new Mapkick.Map("map", data, {style: "mapbox://styles/mapbox/outdoors-v12"})
-```
-
-Zoom and controls
-
-```javascript
-new Mapkick.Map("map", data, {zoom: 15, controls: true})
+new Mapkick.Map("map", data, {markers: {color: "#f84d4d"}}
 ```
 
 Show tooltips on click instead of hover
@@ -149,10 +143,16 @@ Allow HTML in tooltips (must sanitize manually)
 new Mapkick.Map("map", data, {tooltips: {html: true}})
 ```
 
-Marker color
+Map style
 
 ```javascript
-new Mapkick.Map("map", data, {markers: {color: "#f84d4d"}}
+new Mapkick.Map("map", data, {style: "mapbox://styles/mapbox/outdoors-v12"})
+```
+
+Zoom and controls
+
+```javascript
+new Mapkick.Map("map", data, {zoom: 15, controls: true})
 ```
 
 ### Global Options
