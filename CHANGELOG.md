@@ -1,4 +1,4 @@
-## 0.2.3 (unreleased)
+## 0.2.3 (2023-02-08)
 
 - Added experimental support for area maps
 - Improved error handling

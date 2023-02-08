@@ -1,6 +1,6 @@
 {
   "name": "mapkick",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Create beautiful, interactive maps with one line of JavaScript",
   "type": "module",
   "main": "./dist/mapkick.js",

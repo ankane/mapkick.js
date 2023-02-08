@@ -60,7 +60,7 @@ Point map
 new Mapkick.Map("map", [{latitude: 37.7829, longitude: -122.4190}])
 ```
 
-Area map (experimental) [unreleased]
+Area map (experimental)
 
 ```javascript
 new Mapkick.AreaMap("map", [{geometry: {type: "Polygon", coordinates: ...}}])
