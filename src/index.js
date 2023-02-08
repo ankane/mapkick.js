@@ -53,7 +53,7 @@ function createMarkerImage(library, color) {
 
 const maps = {}
 
-class Map {
+class BaseMap {
   constructor(element, data, options) {
     if (!Mapkick.library && typeof window !== "undefined") {
       Mapkick.library = window.mapboxgl || window.maplibregl || null
@@ -563,6 +563,8 @@ class Map {
     }
   }
 }
+
+class Map extends BaseMap {}
 
 const Mapkick = {
   Map: Map,
