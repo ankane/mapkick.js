@@ -318,6 +318,21 @@ class BaseMap {
       return geojson
     }
 
+    function layerBeforeFill(map) {
+      // place below labels
+      const layers = map.getStyle().layers
+      let beforeId
+      for (let i = layers.length - 1; i >= 0; i--) {
+        const layer = layers[i]
+        // TODO improve
+        if (!(layer.metadata && layer.metadata["mapbox:featureComponent"] === "place-labels")) {
+          break
+        }
+        beforeId = layer.id
+      }
+      return beforeId
+    }
+
     function addLayer(name, geojson) {
       const centersById = {}
 
@@ -361,17 +376,7 @@ class BaseMap {
         // TODO make configurable
         const fillColor = "#0090ff"
 
-        // place below labels
-        const layers = map.getStyle().layers
-        let beforeId
-        for (let i = layers.length - 1; i >= 0; i--) {
-          const layer = layers[i]
-          // TODO improve
-          if (!(layer.metadata && layer.metadata["mapbox:featureComponent"] === "place-labels")) {
-            break
-          }
-          beforeId = layer.id
-        }
+        const beforeId = layerBeforeFill(map)
 
         const outlineId = `${name}-outline`
         map.addLayer({
