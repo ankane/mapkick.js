@@ -153,24 +153,28 @@ class BaseMap {
       element.textContent = message
     }
 
+    function errorCatcher(element, data, options, callback) {
+      try {
+        callback(element, data, options)
+      } catch (err) {
+        showError(element, err.message)
+        throw err
+      }
+    }
+
     function fetchData(element, data, options, callback) {
       if (typeof data === "string") {
         getJSON(element, data, function (newData) {
-          callback(element, newData, options)
+          errorCatcher(element, newData, options, callback)
         })
       } else if (typeof data === "function") {
-        try {
-          data(function (newData) {
-            callback(element, newData, options)
-          }, function (message) {
-            showError(element, message)
-          })
-        } catch (err) {
-          showError(element, "Error")
-          throw err
-        }
+        data(function (newData) {
+          errorCatcher(element, newData, options, callback)
+        }, function (message) {
+          showError(element, message)
+        })
       } else {
-        callback(element, data, options)
+        errorCatcher(element, data, options, callback)
       }
     }
 
