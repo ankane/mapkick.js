@@ -210,11 +210,11 @@ class BaseMap {
           const coordinates = rowCoordinates(row)
 
           if (!coordinates[1]) {
-            throw new Error(`missing latitude for index ${i}`)
+            throw new Error(`missing latitude (index: ${i})`)
           }
 
           if (!coordinates[0]) {
-            throw new Error(`missing longitude for index ${i}`)
+            throw new Error(`missing longitude (index: ${i})`)
           }
 
           geometry = {
@@ -225,7 +225,7 @@ class BaseMap {
           geometry = row.geometry
 
           if (!geometry) {
-            throw new Error(`missing geometry for index ${i}`)
+            throw new Error(`missing geometry (index: ${i})`)
           }
 
           delete properties.geometry
