@@ -624,13 +624,26 @@ class BaseMap {
         }
       }
 
+      let zoom = options.zoom
+      let center = options.center
+      if (!center) {
+        if (!bounds.isEmpty()) {
+          center = bounds.getCenter()
+        } else {
+          center = [0, 0]
+          if (!zoom) {
+            zoom = 1
+          }
+        }
+      }
+
       const mapOptions = {
         container: element,
         style: style,
         dragRotate: false,
         touchZoomRotate: false,
-        center: options.center || bounds.getCenter(),
-        zoom: options.zoom || 15
+        center: center,
+        zoom: zoom || 15
       }
       if (!options.style) {
         mapOptions.projection = "mercator"
@@ -649,7 +662,10 @@ class BaseMap {
         if (!map.style.stylesheet) {
           map.style.stylesheet = {}
         }
-        map.fitBounds(bounds, {padding: 40, animate: false, maxZoom: 15})
+
+        if (!bounds.isEmpty()) {
+          map.fitBounds(bounds, {padding: 40, animate: false, maxZoom: 15})
+        }
       }
 
       this.map = map

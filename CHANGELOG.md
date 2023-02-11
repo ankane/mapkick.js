@@ -1,3 +1,7 @@
+## 0.2.5 (unreleased)
+
+- Fixed error with empty maps
+
 ## 0.2.4 (2023-02-11)
 
 - Added `color` option for data points
