@@ -104,7 +104,7 @@ You can specify an icon, label, tooltip, and color for each data point
   icon: "restaurant",
   label: "Hot Chicken Takeover",
   tooltip: "5 stars",
-  color: "#f84d4d" // [unreleased]
+  color: "#f84d4d"
 }
 ```
 
@@ -121,7 +121,7 @@ You can specify a label, tooltip, and color for each data point
   geometry: {type: "Polygon", coordinates: ...},
   label: "Hot Chicken Takeover",
   tooltip: "5 stars",
-  color: "#0090ff" // [unreleased]
+  color: "#0090ff"
 }
 ```
 

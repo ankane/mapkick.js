@@ -1,4 +1,4 @@
-## 0.2.4 (unreleased)
+## 0.2.4 (2023-02-11)
 
 - Added `color` option for data points
 
