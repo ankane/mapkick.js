@@ -1,3 +1,7 @@
+## 0.2.4 (unreleased)
+
+- Added `color` option for data points
+
 ## 0.2.3 (2023-02-08)
 
 - Added experimental support for area maps

@@ -95,7 +95,7 @@ new Mapkick.Map("map", fetchData)
 
 Use `latitude` or `lat` for latitude and `longitude`, `lon`, or `lng` for longitude
 
-You can specify an icon, label, and tooltip for each data point
+You can specify an icon, label, tooltip, and color for each data point
 
 ```javascript
 {
@@ -103,7 +103,8 @@ You can specify an icon, label, and tooltip for each data point
   longitude: ...,
   icon: "restaurant",
   label: "Hot Chicken Takeover",
-  tooltip: "5 stars"
+  tooltip: "5 stars",
+  color: "#f84d4d" // [unreleased]
 }
 ```
 
@@ -113,13 +114,14 @@ You can specify an icon, label, and tooltip for each data point
 
 Use `geometry` with a GeoJSON `Polygon` or `MultiPolygon`
 
-You can specify a label and tooltip for each data point
+You can specify a label, tooltip, and color for each data point
 
 ```javascript
 {
   geometry: {type: "Polygon", coordinates: ...},
   label: "Hot Chicken Takeover",
-  tooltip: "5 stars"
+  tooltip: "5 stars",
+  color: "#0090ff" // [unreleased]
 }
 ```
 
