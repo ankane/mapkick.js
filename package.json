@@ -37,7 +37,7 @@
     "eslint": "^8.8.0",
     "mapbox-gl": "1.13.3",
     "postcss": "^8.4.21",
-    "rollup": "^3.9.1",
+    "rollup": "<3.19.0",
     "rollup-plugin-postcss": "^4.0.2"
   }
 }
