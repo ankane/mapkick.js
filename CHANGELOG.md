@@ -1,3 +1,7 @@
+## 0.3.0 (2023-06-27)
+
+- Added ability to pass `hash` option to the map
+
 ## 0.2.5 (2023-03-11)
 
 - Fixed error with empty maps

@@ -157,6 +157,12 @@ Zoom and controls
 new Mapkick.Map("map", data, {zoom: 15, controls: true})
 ```
 
+Hash (To sync zoom, center latitude, center longitude, bearing, and pitch with the hash fragment of the page's URL)
+
+```javascript
+new Mapkick.Map("map", data, { hash: true })
+```
+
 ### Global Options
 
 To set options for all of your maps, use:

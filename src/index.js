@@ -651,6 +651,9 @@ class BaseMap {
       if (options.accessToken) {
         mapOptions.accessToken = options.accessToken
       }
+      if (options.hash) {
+        mapOptions.hash = true
+      }
       map = new library.Map(mapOptions)
 
       if (options.controls) {
