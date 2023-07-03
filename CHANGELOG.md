@@ -1,3 +1,7 @@
+## 0.2.6 (unreleased)
+
+- Added `library` option
+
 ## 0.2.5 (2023-03-11)
 
 - Fixed error with empty maps

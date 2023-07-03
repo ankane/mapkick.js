@@ -157,6 +157,12 @@ Zoom and controls
 new Mapkick.Map("map", data, {zoom: 15, controls: true})
 ```
 
+Pass options directly to the mapping library [unreleased]
+
+```javascript
+new Mapkick.Map("map", data, {library: {hash: "map"}})
+```
+
 ### Global Options
 
 To set options for all of your maps, use:

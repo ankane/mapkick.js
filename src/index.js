@@ -636,6 +636,9 @@ class BaseMap {
           }
         }
       }
+      if (!zoom) {
+        zoom = 15
+      }
 
       const mapOptions = {
         container: element,
@@ -643,13 +646,16 @@ class BaseMap {
         dragRotate: false,
         touchZoomRotate: false,
         center: center,
-        zoom: zoom || 15
+        zoom: zoom
       }
       if (!options.style) {
         mapOptions.projection = "mercator"
       }
       if (options.accessToken) {
         mapOptions.accessToken = options.accessToken
+      }
+      if (options.library) {
+        Object.assign(mapOptions, options.library)
       }
       map = new library.Map(mapOptions)
 
@@ -663,7 +669,8 @@ class BaseMap {
           map.style.stylesheet = {}
         }
 
-        if (!bounds.isEmpty()) {
+        // check zoom for hash library option
+        if (!bounds.isEmpty() && map.getZoom() === zoom) {
           map.fitBounds(bounds, {padding: 40, animate: false, maxZoom: 15})
         }
       }
