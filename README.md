@@ -163,6 +163,8 @@ Pass options directly to the mapping library [unreleased]
 new Mapkick.Map("map", data, {library: {hash: true}})
 ```
 
+See the documentation for [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/map/) and [MapLibre GL JS](https://maplibre.org/maplibre-gl-js-docs/api/map/) for more info
+
 ### Global Options
 
 To set options for all of your maps, use:
