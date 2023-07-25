@@ -1,6 +1,7 @@
-## 0.2.6 (unreleased)
+## 0.2.6 (2023-07-24)
 
 - Added `library` option
+- Support for area maps is no longer experimental
 
 ## 0.2.5 (2023-03-11)
 
