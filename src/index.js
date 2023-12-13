@@ -603,6 +603,21 @@ class BaseMap {
       }
     }
 
+    const updateArea = (e, draw) => {
+      const data = draw.getAll()
+      const answer = document.getElementById('calculated-area')
+      if (data.features.length > 0) {
+        const area = window.turf.area(data)
+        const roundedArea = Math.round(area * 100) / 100
+        answer.innerHTML = `${roundedArea}`
+      } else {
+        answer.innerHTML = '0'
+        if (e.type !== 'draw.delete') {
+          alert('Click the map to draw a polygon.')
+        }
+      }
+    }
+
     const generateMap = (element, data, options) => {
       const geojson = generateGeoJSON(data, options)
       options = options || {}
@@ -673,6 +688,27 @@ class BaseMap {
         if (!bounds.isEmpty() && map.getZoom() === zoom) {
           map.fitBounds(bounds, {padding: 40, animate: false, maxZoom: 15})
         }
+      }
+
+      if(options.displayScale){
+        map.addControl(new window.mapboxgl.ScaleControl())
+      }
+
+      if(options.draw){
+        const draw = new window.MapboxDraw({
+          displayControlsDefault: false,
+          controls: {
+            polygon: true,
+            trash: true
+          },
+          defaultMode: 'draw_polygon'
+        })
+
+        map.addControl(draw)
+
+        map.on('draw.create', (e) => updateArea(e, draw))
+        map.on('draw.delete', (e) => updateArea(e, draw))
+        map.on('draw.update', (e) => updateArea(e, draw))
       }
 
       this.map = map
