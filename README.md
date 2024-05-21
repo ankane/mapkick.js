@@ -6,7 +6,7 @@ Create beautiful, interactive maps with one line of JavaScript
 
 For charts, check out [Chartkick.js](https://github.com/ankane/chartkick.js)
 
-[![Build Status](https://github.com/ankane/mapkick.js/workflows/build/badge.svg?branch=master)](https://github.com/ankane/mapkick.js/actions)
+[![Build Status](https://github.com/ankane/mapkick.js/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/mapkick.js/actions)
 
 ## Installation
 
