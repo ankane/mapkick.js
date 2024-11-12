@@ -31,13 +31,13 @@
   "homepage": "https://github.com/ankane/mapkick.js",
   "devDependencies": {
     "@rollup/plugin-buble": "^1.0.1",
-    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-terser": "^0.2.1",
+    "@rollup/plugin-terser": "^0.4.4",
     "eslint": "^9.14.0",
     "mapbox-gl": "1.13.3",
     "postcss": "^8.4.21",
-    "rollup": "<3.19.0",
+    "rollup": "^4.25.0",
     "rollup-plugin-postcss": "^4.0.2"
   }
 }
