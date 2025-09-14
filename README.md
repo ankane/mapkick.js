@@ -19,8 +19,8 @@ First, [create a Mapbox account](https://account.mapbox.com/auth/signup/) to get
 Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your HTML file:
 
 ```html
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet" />
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script>
 <script src="mapkick.js"></script>
 <script>
   mapboxgl.accessToken = "YOUR-TOKEN"
@@ -32,8 +32,8 @@ Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your
 Download [mapkick.js](https://unpkg.com/mapkick) and add in the `<head>` of your HTML file:
 
 ```html
-<link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
-<script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+<script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script>
 <script src="mapkick.js"></script>
 <script>
   Mapkick.options = {style: "https://demotiles.maplibre.org/style.json"}
