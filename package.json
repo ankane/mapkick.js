@@ -14,8 +14,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "build-dev": "rollup -c --dev",
-    "lint": "eslint src"
+    "build-dev": "rollup -c --dev"
   },
   "repository": {
     "type": "git",
@@ -34,7 +33,6 @@
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.4",
-    "eslint": "^9.14.0",
     "mapbox-gl": "1.13.3",
     "postcss": "^8.4.21",
     "rollup": "^4.25.0",
