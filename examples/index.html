@@ -10,6 +10,12 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script>
     <script src="access-token.js"></script>
 
+    <!-- For polygon draw -->
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.css" type="text/css">
+    <!-- ------- -->
+
     <!--
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.13.2/mapbox-gl.css" rel="stylesheet" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.13.2/mapbox-gl.js"></script>
@@ -78,6 +84,22 @@
       <script>
         new Mapkick.Map("label", [{latitude: 37.7829, longitude: -122.4190, label: "Hello"}]);
       </script>
+
+      <h1>Zoom Navigation</h1>
+      <div id="zoom-navigation" class="map"></div>
+      <script>
+        new Mapkick.Map("zoom-navigation", [{latitude: 37.7829, longitude: -122.4190, label: "Hello"}], {controls: true, displayScale: true});
+      </script>
+
+      <h1>Calculate area</h1>
+      <div id="calculate-area" class="map"></div>
+      <script>
+        new Mapkick.Map("calculate-area", [{latitude: 37.7829, longitude: -122.4190, label: "Hello"}], {draw: true});
+      </script>
+      <div>
+        <p>Click the map to draw a polygon.</p>
+        <p><span id="calculated-area">0</span> square meters.</p>
+      </div> 
 
       <h1>No Hover</h1>
       <div id="no-hover" class="map"></div>

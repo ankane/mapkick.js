@@ -154,7 +154,13 @@ new Mapkick.Map("map", data, {style: "mapbox://styles/mapbox/outdoors-v12"})
 Zoom and controls
 
 ```javascript
-new Mapkick.Map("map", data, {zoom: 15, controls: true})
+new Mapkick.Map("map", data, {zoom: 15, controls: true, displayScale: true})
+```
+
+Calculate area
+
+```javascript
+new Mapkick.Map("map", data, {draw: true})
 ```
 
 Pass options directly to the mapping library
@@ -244,3 +250,6 @@ cd mapkick.js
 npm install
 npm run build-dev
 ```
+To test in development:
+
+Create an access-token.js file in examples folder, and put your mapbox access token inside
