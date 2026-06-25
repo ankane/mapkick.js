@@ -16,10 +16,6 @@
     },
     "./bundle": "./dist/mapkick.bundle.js"
   },
-  "scripts": {
-    "build": "rollup -c",
-    "build-dev": "rollup -c --dev"
-  },
   "devDependencies": {
     "@rollup/plugin-buble": "^1.0.1",
     "@rollup/plugin-commonjs": "^28.0.1",
@@ -29,5 +25,9 @@
     "postcss": "^8.4.21",
     "rollup": "^4.25.0",
     "rollup-plugin-postcss": "^4.0.2"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "build-dev": "rollup -c --dev"
   }
 }

@@ -13,7 +13,7 @@ const banner =
 `/*
  * Mapkick.js v${pkg.version}
  * ${pkg.description}
- * ${pkg.repository.url}
+ * ${pkg.homepage}
  * ${pkg.license} License
  */
 `;
@@ -25,7 +25,7 @@ const bundleBanner =
  * This bundle includes:
  *
  * Mapkick.js v${pkg.version}
- * ${pkg.repository.url}
+ * ${pkg.homepage}
  * ${pkg.license} License
  *
  * @mapbox/geojson-rewind v0.5.0
