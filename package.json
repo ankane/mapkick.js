@@ -2,7 +2,11 @@
   "name": "mapkick",
   "version": "0.2.6",
   "description": "Create beautiful, interactive maps with one line of JavaScript",
+  "homepage": "https://github.com/ankane/mapkick.js",
+  "license": "MIT",
+  "author": "Andrew Kane",
   "type": "module",
+  "files": ["bundle", "dist", "licenses"],
   "main": "./dist/mapkick.js",
   "module": "./dist/mapkick.esm.js",
   "exports": {
@@ -16,18 +20,6 @@
     "build": "rollup -c",
     "build-dev": "rollup -c --dev"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ankane/mapkick.js"
-  },
-  "files": [
-    "bundle",
-    "dist",
-    "licenses"
-  ],
-  "author": "ankane",
-  "license": "MIT",
-  "homepage": "https://github.com/ankane/mapkick.js",
   "devDependencies": {
     "@rollup/plugin-buble": "^1.0.1",
     "@rollup/plugin-commonjs": "^28.0.1",
