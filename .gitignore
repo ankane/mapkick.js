@@ -1,6 +1,7 @@
+.pnpm-store/
 node_modules/
 dist/
 examples/access-token.js
 package-lock.json
+pnpm-*.yaml
 *.lock
-*.log
