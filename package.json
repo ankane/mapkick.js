@@ -6,7 +6,11 @@
   "license": "MIT",
   "author": "Andrew Kane",
   "type": "module",
-  "files": ["bundle", "dist", "licenses"],
+  "files": [
+    "bundle",
+    "dist",
+    "licenses"
+  ],
   "main": "./dist/mapkick.js",
   "module": "./dist/mapkick.esm.js",
   "exports": {
